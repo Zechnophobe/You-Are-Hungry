@@ -1,3 +1,7 @@
+/**
+ * A Game object represents the game state state
+ * It is responsible for interactions with that state
+ */
 class Game {
 	constructor(){
 		this.food = 0;
