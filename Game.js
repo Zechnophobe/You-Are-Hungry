@@ -4,6 +4,7 @@
  */
 class Game {
 	constructor(){
+		this.tier = GameTiers.hungry;
 		this.food = 0;
 		this.wood = 0;
 		this.friends = 0;

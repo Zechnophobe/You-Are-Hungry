@@ -6,6 +6,7 @@ let chopWoodDisplay;
 let playSpeed;
 const defaultPlaySpeed = 100;
 let playLoopStatus = PlayLoopStatus.playing;
+const displayElements = [];
 
  $(document).ready( function () {
     init();
@@ -14,11 +15,17 @@ let playLoopStatus = PlayLoopStatus.playing;
 
  function init() {
     game = new Game();
-    forageButton = new ForageButton(game);
-    chopWoodButton = new ChopWoodButton(game);
-    foodDisplay = new FoodDisplay(game);
-    chopWoodDisplay = new ChopWoodDisplay(game);
+    addElement(ForageButton);
+    addElement(ChopWoodButton);
+    addElement(FoodDisplay);
+    addElement(ChopWoodDisplay);
+    addElement(GameTierDisplay);
+    render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;
+ }
+
+ function addElement(elementClass) {
+    displayElements.push(new elementClass(game))
  }
 
  function startPlayLoop() {
@@ -36,8 +43,7 @@ let playLoopStatus = PlayLoopStatus.playing;
  }
 
  function render() {
-    forageButton.render();
-    chopWoodButton.render();
-    foodDisplay.render();
-    chopWoodDisplay.render();
+    for (let element of displayElements) {
+        element.render();
+    }
  }
