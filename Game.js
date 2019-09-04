@@ -14,4 +14,17 @@ class Game {
 	tick() {
 
 	}
+
+	load(saveObject) {
+		this.tier = saveObject.tier;
+		this.food = saveObject.food;
+		this.wood = saveObject.wood;
+		this.friends = saveObject.friends;
+	}
+
+	save() {
+		return {
+			...this,
+		}
+	}
 }

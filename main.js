@@ -1,8 +1,4 @@
 let game;
-let forageButton;
-let chopWoodButton;
-let foodDisplay;
-let chopWoodDisplay;
 let playSpeed;
 const defaultPlaySpeed = 100;
 let playLoopStatus = PlayLoopStatus.playing;
