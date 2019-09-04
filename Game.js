@@ -8,4 +8,9 @@ class Game {
 		this.wood = 0;
 		this.friends = 0;
 	}
+
+	// What computes every game increment
+	tick() {
+
+	}
 }

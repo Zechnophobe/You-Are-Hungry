@@ -5,10 +5,11 @@ let foodDisplay;
 let chopWoodDisplay;
 let playSpeed;
 const defaultPlaySpeed = 100;
+let playLoopStatus = PlayLoopStatus.playing;
 
  $(document).ready( function () {
     init();
-    startPlayLoop()
+    startPlayLoop();
  });
 
  function init() {
@@ -28,7 +29,10 @@ const defaultPlaySpeed = 100;
  }
 
  function onLoop() {
-    render()
+    if (playLoopStatus === PlayLoopStatus.playing) {
+        render();
+        game.tick();
+    }
  }
 
  function render() {
