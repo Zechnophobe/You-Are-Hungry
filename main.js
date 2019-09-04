@@ -20,8 +20,8 @@ const displayElements = [];
     playSpeed = defaultPlaySpeed;
  }
 
- function addElement(elementClass) {
-    displayElements.push(new elementClass(game))
+ function addElement(elementClass, module = game) {
+    displayElements.push(new elementClass(module))
  }
 
  function startPlayLoop() {
