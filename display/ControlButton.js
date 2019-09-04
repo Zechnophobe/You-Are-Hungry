@@ -34,8 +34,7 @@ class ControlButton {
 			this.element.hide();
 		}
 	}
-	
-	
+
 	onPress() {
 		this.render();
 	}
@@ -53,7 +52,7 @@ class ForageButton extends ControlButton {
 	}
 	
 	onPress() {
-		this.game.food += 1;
+		this.game.gainFood();
 		super.onPress()
 	}
 	
