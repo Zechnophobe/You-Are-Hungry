@@ -2,7 +2,7 @@ class ControlButton {
 	
 	constructor(game) {
 		this.game = game;
-		this.config()
+		this.config();
 		this.setup()
 	}
 	
@@ -34,8 +34,7 @@ class ControlButton {
 			this.element.hide();
 		}
 	}
-	
-	
+
 	onPress() {
 		this.render();
 	}
@@ -49,11 +48,11 @@ class ForageButton extends ControlButton {
 		this.name = "Forage For Food";
 		this.requirement = [];
 		this.isVisible = true;
-		this.element = $("#forage-button");
+		this.element = $(Elements.forageButton);
 	}
 	
 	onPress() {
-		this.game.food += 1;
+		this.game.gainFood();
 		super.onPress()
 	}
 	
@@ -65,7 +64,7 @@ class ChopWoodButton extends ControlButton {
 		this.name = "Chop Wood";
 		this.requirement = ['hunger is full'];
 		this.isVisible = false;
-		this.element = $("#chop-wood-button");
+		this.element = $(Elements.chopWoodButton);
 	}
 	
 	onPress() {
