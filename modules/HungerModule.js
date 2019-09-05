@@ -28,7 +28,7 @@ class HungerModule extends Module {
          * Eats at a rate that will be about 1 food consumed per second.
          */
 	    if (this.game.currentHunger < this.game.maxHunger && this.game.food >= .1) {
-            this.game.food -= .1; // Direct modification since
+            this.game.food -= .1; // Direct modification to food because it is a cost
             this.game.currentHunger = Math.min(this.game.maxHunger, this.game.currentHunger + .2)
 
         }
