@@ -1,7 +1,7 @@
 class DisplayElement {
-	constructor(game) {
+	constructor(module) {
 		this.setMeUp();
-		this.game = game;
+		this.module = module;
 		this.element = $(this.elementId);
 	}
 	setMeUp() {
@@ -21,7 +21,7 @@ class GameTierDisplay extends DisplayElement {
 	}
 
 	render() {
-		this.element.text('You are ' + this.game.tier);
+		this.element.text('You are ' + this.module.tier);
 	}
 }
 
@@ -42,7 +42,7 @@ class CounterDisplay extends DisplayElement {
 	render() {
 		if (this.shouldRender()) {
 			this.element.show();
-			this.element.text(this.counterName + ': ' + this.counterValue());
+			this.element.text(this.counterName + ': ' + this.counterValue().toFixed(2));
 		} else {
 			this.element.hide();
 		}
@@ -57,7 +57,7 @@ class FoodDisplay extends CounterDisplay {
 	}
 
 	counterValue() {
-		return this.game.food;
+		return this.module.food;
 	}
 
 	
@@ -71,7 +71,45 @@ class ChopWoodDisplay extends CounterDisplay {
 	}
 
 	counterValue() {
-		return this.game.wood;
+		return this.module.wood;
 	}
 	
+}
+
+class ProgressBarDisplay extends DisplayElement {
+	constructor(module) {
+		super(module);
+		this.progressElement = $(this.elementId +' .progress-bar');
+	}
+	// value from 0 to 1 that represents how full the bar is.
+	getPercentageDecimal() {
+		return 0.0;
+	}
+
+	shouldRender() {
+		return true;
+	}
+
+	render() {
+		if (this.shouldRender()) {
+			this.element.show();
+			const percent = this.getPercentageDecimal() * 100; //convert to percentage
+			const style = percent + '%';
+			this.progressElement.css("width", style);
+		} else {
+			this.element.hide();
+		}
+
+	}
+}
+
+class HungerBarDisplay extends ProgressBarDisplay {
+
+	setMeUp() {
+		this.elementId = Elements.hungerProgress;
+	}
+
+	getPercentageDecimal() {
+		return this.module.hungerPercentage();
+	}
 }

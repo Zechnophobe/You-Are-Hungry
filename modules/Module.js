@@ -4,7 +4,9 @@
  * it acts very similarly to the game class.
  */
 class Module {
-
+    constructor(game) {
+        this.game = game;
+    }
 	gainFood(input) {
 		return input;
 	}

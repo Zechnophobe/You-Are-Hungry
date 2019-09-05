@@ -4,6 +4,7 @@ const Elements = {
     foodDisplay: '#food-display',
     chopWoodDisplay: '#chop-wood-display',
     gameTierDisplay: '#game-tier-display',
+    hungerProgress: '#hunger-progress',
 };
 
 const PlayLoopStatus = {
