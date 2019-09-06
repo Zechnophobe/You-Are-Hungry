@@ -30,11 +30,12 @@ class ControlButton {
 	render() {
 		if (this.shouldActivate()) {
 			this.isVisible = true;
+			this.element.show();
 		}
 		this.element.text(this.name);
 		if (this.isVisible) {
 			this.element.show();
-			this.element.attr('title', this.tooltip());
+			this.element.attr('data-original-title', this.tooltip());
 			this.element.tooltip();
 		} else {
 			this.element.hide();
@@ -49,7 +50,9 @@ class ControlButton {
 		if (this.costs.pay()) {
 			this.action();
 		}
+		this.element.tooltip('hide');
 		this.render();
+		this.element.tooltip('show');
 	}
 
 }
@@ -65,9 +68,14 @@ class ForageButton extends ControlButton {
 	}
 	
 	action() {
-		this.game.gainFood();
+		this.game.gainResource({[Resources.food]: 1});
 	}
-	
+	tooltip() {
+		let message = super.tooltip();
+		message = 'Gain ' + this.game.yields().food.toFixed(2) + ' food<br>' + message;
+		return message;
+	}
+
 }
 
 class ChopWoodButton extends ControlButton {
@@ -81,7 +89,7 @@ class ChopWoodButton extends ControlButton {
 	}
 	
 	action() {
-		this.game.wood += 1;
+		this.game.gainResource({[Resources.wood]: 1});
 	}
 	
 	shouldActivate() {
@@ -102,7 +110,7 @@ class BuildHutButton extends ControlButton {
 	}
 
 	action() {
-		this.game.huts += 1;
+		this.game.gainResource({[Resources.huts]: 1});
 	}
 
 	shouldActivate() {

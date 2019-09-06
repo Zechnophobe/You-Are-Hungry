@@ -30,18 +30,37 @@ class Game extends Module {
         }
 	}
 
-	gainFood(amount = 1) {
-		let total = amount;
-		for (let module of this.modules) {
-			total = module.gainFood(total);
+	gainResource(amount) {
+		for ( let module of this.modules) {
+			amount = module.gainResource(amount);
 		}
-		this.food += total;
+		for (let [name, quantity] of Object.entries(amount)) {
+			this[name] += quantity;
+		}
+	}
+
+	yields() {
+		let result = {};
+
+		// Default all modifiers to 1
+		for (let resource of Object.values(Resources)){
+			result[resource] = 1;
+		}
+
+		// Apply all modules to modifiers
+		for ( let module of this.modules) {
+			result = module.gainResource(result);
+		}
+
+		//TODO apply other simple modifiers
+		return result;
 	}
 
 	load(saveObject) {
 		this.tier = saveObject.tier;
 		this.food = saveObject.food;
 		this.wood = saveObject.wood;
+		this.huts = saveObject.huts;
 		this.friends = saveObject.friends;
 	}
 

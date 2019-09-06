@@ -2,16 +2,26 @@ class HungerModule extends Module {
 	constructor(game) {
 		super(game);
 
+		this.hungerModifiedResources = [Resources.food, Resources.wood];
 		addElement(HungerBarDisplay, this);
 	}
 
-	gainFood(foodAmount) {
-		// At starving, you gain half the normal amount of food when you gain it.
-		// At completely full, you gain 150% of the normal amount of food when you gain it.
+	modifyResource(amount) {
+		// At starving, you gain half the normal amount of resources.
+		// At completely full, you gain 150% of the normal amount of resources.
 		// min plus percent of full times difference from min to max
 		const modifierRange = this.game.maxModifier - this.game.minModifier;
 		const modifier = this.game.minModifier + this.hungerPercentage() * modifierRange;
-		return foodAmount * modifier;
+		return amount * modifier;
+	}
+
+	gainResource(amount) {
+		for (let resource of this.hungerModifiedResources) {
+			if (amount[resource] !== undefined) {
+				amount[resource] = this.modifyResource(amount[resource])
+			}
+		}
+		return amount;
 	}
 
 	hungerPercentage() {

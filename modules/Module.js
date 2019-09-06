@@ -7,16 +7,9 @@ class Module {
     constructor(game) {
         this.game = game;
     }
-	gainFood(input) {
-		return input;
-	}
 
-	woodModifier(input) {
-		return input;
-	}
-
-	friendModifier(input) {
-		return input;
+	gainResource(amount) {
+		return amount;
 	}
 
 	tick() {}

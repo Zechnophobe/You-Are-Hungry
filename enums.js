@@ -32,4 +32,5 @@ const Resources = {
     hunger: 'hunger',
     food: 'food',
     wood: 'wood',
+    huts: 'huts',
 };
