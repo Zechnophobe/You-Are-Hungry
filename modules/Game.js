@@ -9,14 +9,17 @@ class Game extends Module {
 		this.food = 0;
 		this.wood = 0;
 		this.huts = 0;
+		this.hunger = 55.0;
 		this.friends = 0;
 		this.modules = [];
+		this.modifiers = [];
 
 		// Max hunger means you are completely full. 0 hunger means you are starving.
-		this.maxHunger = 100.0;
-		this.hunger = 25.0;
-		this.maxModifier = 1.5;
-		this.minModifier = 0.5;
+		this.vals = {
+			[Values.maxHunger]: 100,
+			[Values.maxHungerModifier]: 1.5,
+			[Values.minHungerModifier]: 0.5,
+		};
 		this.addModule(new HungerModule(this))
 	}
 
@@ -25,7 +28,7 @@ class Game extends Module {
 		for (let module of this.modules) {
 			module.tick();
 		}
-	    if (this.hunger >= this.maxHunger && this.tier === GameTiers.hungry) {
+	    if (this.hunger >= this.val(Values.maxHunger) && this.tier === GameTiers.hungry) {
 	        this.tier = GameTiers.cold;
         }
 	}
@@ -37,6 +40,14 @@ class Game extends Module {
 		for (let [name, quantity] of Object.entries(amount)) {
 			this[name] += quantity;
 		}
+	}
+
+	val(valName) {
+		let finalModifier = 1;
+		for (let modifier of this.modifiers) {
+			finalModifier *= modifier.getModifier(valName)
+		}
+		return this.vals[valName] * finalModifier;
 	}
 
 	yields() {

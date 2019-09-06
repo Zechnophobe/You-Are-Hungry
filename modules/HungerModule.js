@@ -10,8 +10,11 @@ class HungerModule extends Module {
 		// At starving, you gain half the normal amount of resources.
 		// At completely full, you gain 150% of the normal amount of resources.
 		// min plus percent of full times difference from min to max
-		const modifierRange = this.game.maxModifier - this.game.minModifier;
-		const modifier = this.game.minModifier + this.hungerPercentage() * modifierRange;
+
+        const maxModifier = this.game.val(Values.maxHungerModifier);
+        const minModifier = this.game.val(Values.minHungerModifier);
+		const modifierRange = maxModifier - minModifier;
+		const modifier = minModifier + this.hungerPercentage() * modifierRange;
 		return amount * modifier;
 	}
 
@@ -25,7 +28,7 @@ class HungerModule extends Module {
 	}
 
 	hungerPercentage() {
-		return this.game.hunger / this.game.maxHunger;
+		return this.game.hunger / this.game.val(Values.maxHunger);
 	}
 
 	tick() {
@@ -38,10 +41,11 @@ class HungerModule extends Module {
          * Eats at a rate that will be about 1 food consumed per second.
          */
 
-	    if (this.game.hunger < this.game.maxHunger) {
+        const maxHunger = this.game.val(Values.maxHunger);
+	    if (this.game.hunger < maxHunger) {
 	        const foodEaten = Math.min(.1, this.game.food);
             this.game.food -= foodEaten; // Direct modification to food because it is a cost
-            this.game.hunger = Math.min(this.game.maxHunger, this.game.hunger + 2*foodEaten)
+            this.game.hunger = Math.min(maxHunger, this.game.hunger + 2*foodEaten)
 
         }
     }

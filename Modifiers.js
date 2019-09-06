@@ -4,12 +4,10 @@
  * If you want a calculation that is more than this, instead consider using a Module
  */
 class Modifier {
-    setMeUp() {
-        this.modifiers = {};
-    }
 
-    constructor() {
-        this.setMeUp();
+    constructor(modifiers, name) {
+        this.modifiers = modifiers;
+        this.name = name;
     }
 
     getModifier(valueName) {
@@ -21,25 +19,37 @@ class Modifier {
     }
 }
 
-
-class Achievement extends Upgrade {
-
-    constructor() {
-        super();
-        this.has = false;
+class Upgrade {
+    constructor(game) {
+        this.game = game;
+        this.setMeUp();
     }
 
-    tryToClaimAchievement() {
-        /**
-         * Concrete achievements will define how they are acquired.
-         */
-    }
-}
-
-class Upgrade extends Modifier {
     setMeUp() {
         this.costs = [];
         this.requirements = [];
+        this.modifier = undefined;
+        this.purchased = false;
     }
 
+    available() {
+        return !this.purchased; // TODO Should actually check all requirements
+    }
+
+    purchase() {
+        if (this.costs.pay()) {
+            this.purchased = true;
+            return true;
+        }
+    }
+
+
+}
+
+class BowlUpgrade extends Upgrade {
+    setMeUp() {
+        super.setMeUp();
+        this.costs = [new WoodCost(this.game, 2)];
+        this.modifer = new Modifier({biteSize: 1.5}, 'wood bowl')
+    }
 }

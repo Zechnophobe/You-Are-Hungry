@@ -34,3 +34,9 @@ const Resources = {
     wood: 'wood',
     huts: 'huts',
 };
+
+const Values = {
+  maxHunger: 'maxHunger',
+  maxHungerModifier: 'maxHungerModifier',
+  minHungerModifier: 'minHungerModifier',
+};
