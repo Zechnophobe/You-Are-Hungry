@@ -70,6 +70,7 @@ class ForageButton extends ControlButton {
 	action() {
 		this.game.gainResource({[Resources.food]: 1});
 	}
+
 	tooltip() {
 		let message = super.tooltip();
 		message = 'Gain ' + this.game.yields().food.toFixed(2) + ' food<br>' + message;
@@ -95,6 +96,12 @@ class ChopWoodButton extends ControlButton {
 	shouldActivate() {
 		return this.game.tier === GameTiers.cold;
 	}
+
+	tooltip() {
+		let message = super.tooltip();
+		message = 'Gain ' + this.game.yields().wood.toFixed(2) + ' wood<br>' + message;
+		return message;
+	}
 	
 }
 
@@ -115,6 +122,12 @@ class BuildHutButton extends ControlButton {
 
 	shouldActivate() {
 		return this.game.tier === GameTiers.cold;
+	}
+
+	tooltip() {
+		let message = super.tooltip();
+		message = 'Build ' + this.game.yields().huts.toFixed(2) + ' huts<br>' + message;
+		return message;
 	}
 
 }
