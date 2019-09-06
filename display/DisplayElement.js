@@ -29,6 +29,7 @@ class CounterDisplay extends DisplayElement {
 	setMeUp() {
 		this.elementId = '';
 		this.counterName = '';
+		this.on = false;
 	}
 
 	counterValue() {
@@ -36,7 +37,9 @@ class CounterDisplay extends DisplayElement {
 	}
 
 	shouldRender() {
-		return this.counterValue() > 0;
+		const result =  this.on || this.counterValue() > 0;
+		this.on = result;
+		return result;
 	}
 
 	render() {
@@ -74,6 +77,19 @@ class ChopWoodDisplay extends CounterDisplay {
 		return this.module.wood;
 	}
 	
+}
+
+
+class HutsDisplay extends CounterDisplay {
+	setMeUp() {
+		this.elementId = Elements.hutsDisplay;
+		this.counterName = 'Hut';
+	}
+
+	counterValue() {
+		return this.module.huts;
+	}
+
 }
 
 class ProgressBarDisplay extends DisplayElement {

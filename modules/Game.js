@@ -8,6 +8,7 @@ class Game extends Module {
 		this.tier = GameTiers.hungry;
 		this.food = 0;
 		this.wood = 0;
+		this.huts = 0;
 		this.friends = 0;
 		this.modules = [];
 
@@ -25,7 +26,7 @@ class Game extends Module {
 			module.tick();
 		}
 	    if (this.currentHunger >= this.maxHunger && this.tier === GameTiers.hungry) {
-	        this.tier = GameTiers.alone;
+	        this.tier = GameTiers.cold;
         }
 	}
 

@@ -27,9 +27,11 @@ class HungerModule extends Module {
          * Consumes food from the stock to replenish your hunger bar
          * Eats at a rate that will be about 1 food consumed per second.
          */
-	    if (this.game.currentHunger < this.game.maxHunger && this.game.food >= .1) {
-            this.game.food -= .1; // Direct modification to food because it is a cost
-            this.game.currentHunger = Math.min(this.game.maxHunger, this.game.currentHunger + .2)
+
+	    if (this.game.currentHunger < this.game.maxHunger) {
+	        const foodEaten = Math.min(.1, this.game.food);
+            this.game.food -= foodEaten; // Direct modification to food because it is a cost
+            this.game.currentHunger = Math.min(this.game.maxHunger, this.game.currentHunger + 2*foodEaten)
 
         }
     }

@@ -1,8 +1,10 @@
 const Elements = {
     forageButton: "#forage-button",
     chopWoodButton: "#chop-wood-button",
+    buildHutButton: "#build-hut-button",
     foodDisplay: '#food-display',
     chopWoodDisplay: '#chop-wood-display',
+    hutsDisplay: '#huts-display',
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
 };
@@ -15,5 +17,13 @@ const PlayLoopStatus = {
 const GameTiers = {
     hungry: 'Hungry',
     sad: 'Sad',
-    alone: 'Alone',
+    lonely: 'Lonely',
+    cold: 'Cold',
 };
+
+const TierOrder = [
+    GameTiers.hungry,
+    GameTiers.cold,
+    GameTiers.lonely,
+    GameTiers.sad,
+];

@@ -16,6 +16,8 @@ const displayElements = [];
     addElement(FoodDisplay);
     addElement(ChopWoodDisplay);
     addElement(GameTierDisplay);
+    addElement(BuildHutButton);
+    addElement(HutsDisplay);
     render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;
  }
