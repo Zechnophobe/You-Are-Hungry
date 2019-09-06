@@ -15,7 +15,7 @@ class HungerModule extends Module {
 	}
 
 	hungerPercentage() {
-		return this.game.currentHunger / this.game.maxHunger;
+		return this.game.hunger / this.game.maxHunger;
 	}
 
 	tick() {
@@ -28,10 +28,10 @@ class HungerModule extends Module {
          * Eats at a rate that will be about 1 food consumed per second.
          */
 
-	    if (this.game.currentHunger < this.game.maxHunger) {
+	    if (this.game.hunger < this.game.maxHunger) {
 	        const foodEaten = Math.min(.1, this.game.food);
             this.game.food -= foodEaten; // Direct modification to food because it is a cost
-            this.game.currentHunger = Math.min(this.game.maxHunger, this.game.currentHunger + 2*foodEaten)
+            this.game.hunger = Math.min(this.game.maxHunger, this.game.hunger + 2*foodEaten)
 
         }
     }

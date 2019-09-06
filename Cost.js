@@ -24,65 +24,33 @@ class Cost {
 
 class ResourceCost extends Cost {
 
-    setMeUp() {
-        this.resourceName = '';
-    }
-
-    constructor(game, amount) {
-        super(game, amount);
-        this.setMeUp();
+    costs() {
+        return Object.entries(this.amount);
     }
 
     canBePayed() {
-        return this.game[this.resourceName] >= this.amount;
+        let result = true;
+        for (let [name, amount] of this.costs()) {
+            result &= this.game[name] >= amount;
+        }
+        return result
     }
 
     pay() {
         if (this.canBePayed()) {
-            this.game[this.resourceName] -= this.amount;
+            for (let [name, amount] of this.costs()) {
+                this.game[name] -= amount;
+            }
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     str() {
-        return 'requires <b>' + this.amount + '</b> ' + this.resourceName;
+        let message = '';
+        for (let [name, amount] of this.costs()) {
+            message += 'requires <b>' + amount + '</b> ' + name + '<br>';
+        }
+        return message;
     }
-}
-
-class FoodCost extends ResourceCost {
-
-    setMeUp() {
-        this.resourceName = 'food';
-    }
-
-}
-
-class WoodCost extends ResourceCost {
-
-    setMeUp() {
-        this.resourceName = 'wood';
-    }
-
-}
-
-class HutsCost extends ResourceCost {
-
-    setMeUp() {
-        this.resourceName = 'huts';
-    }
-
-}
-
-class HungerCost extends ResourceCost {
-
-    setMeUp() {
-        this.resourceName = 'currentHunger';
-    }
-
-    str() {
-        return 'requires <b>' + this.amount + '</b> hunger';
-    }
-
 }

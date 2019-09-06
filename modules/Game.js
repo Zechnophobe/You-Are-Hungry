@@ -14,7 +14,7 @@ class Game extends Module {
 
 		// Max hunger means you are completely full. 0 hunger means you are starving.
 		this.maxHunger = 100.0;
-		this.currentHunger = 25.0;
+		this.hunger = 25.0;
 		this.maxModifier = 1.5;
 		this.minModifier = 0.5;
 		this.addModule(new HungerModule(this))
@@ -25,7 +25,7 @@ class Game extends Module {
 		for (let module of this.modules) {
 			module.tick();
 		}
-	    if (this.currentHunger >= this.maxHunger && this.tier === GameTiers.hungry) {
+	    if (this.hunger >= this.maxHunger && this.tier === GameTiers.hungry) {
 	        this.tier = GameTiers.cold;
         }
 	}

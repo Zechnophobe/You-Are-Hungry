@@ -27,3 +27,9 @@ const TierOrder = [
     GameTiers.lonely,
     GameTiers.sad,
 ];
+
+const Resources = {
+    hunger: 'hunger',
+    food: 'food',
+    wood: 'wood',
+};

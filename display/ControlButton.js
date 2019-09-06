@@ -15,7 +15,7 @@ class ControlButton {
 	
 	setup() {
 		this.element.on('click', () => {
-				this.onPress();
+			this.onPress();
 		})
 	}
 	
@@ -24,11 +24,7 @@ class ControlButton {
 	}
 
 	tooltip() {
-		let message = '';
-		for (let cost of this.costs) {
-			message += cost.str() + '<br>';
-		}
-		return message;
+		return this.costs.str();
 	}
 	
 	render() {
@@ -50,7 +46,7 @@ class ControlButton {
 	}
 
 	onPress() {
-		if (payCosts(this.costs)) {
+		if (this.costs.pay()) {
 			this.action();
 		}
 		this.render();
@@ -61,7 +57,7 @@ class ControlButton {
 
 class ForageButton extends ControlButton {
 	config() {
-		this.costs = [];
+		this.costs = new ResourceCost(this.game, {});
 		this.name = "Forage For Food";
 		this.requirement = [];
 		this.isVisible = true;
@@ -76,7 +72,9 @@ class ForageButton extends ControlButton {
 
 class ChopWoodButton extends ControlButton {
 	config() {
-		this.costs = [new HungerCost(this.game, 20)];
+		this.costs = new ResourceCost(this.game, {
+			[Resources.hunger]: 10,
+		});
 		this.name = "Chop Wood";
 		this.isVisible = false;
 		this.element = $(Elements.chopWoodButton);
@@ -94,7 +92,10 @@ class ChopWoodButton extends ControlButton {
 
 class BuildHutButton extends ControlButton {
 	config() {
-		this.costs = [new HungerCost(this.game, 50), new WoodCost(this.game,10)];
+		this.costs = new ResourceCost(this.game,{
+			[Resources.hunger]: 50,
+			[Resources.wood]: 10,
+		});
 		this.name = "Build Hut";
 		this.isVisible = false;
 		this.element = $(Elements.buildHutButton);
