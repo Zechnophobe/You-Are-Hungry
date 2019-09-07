@@ -85,15 +85,15 @@ class Game extends Module {
         this.modules.push(module);
     }
 
-    hasUpgrade(upgradeName) {
-        return this.upgrades[upgradeName] !== undefined;
+    hasUpgrade(upgradeId) {
+        return this.upgrades[upgradeId] !== undefined;
     }
 
     gainUpgrade(upgrade) {
-        if (this.hasUpgrade(upgrade.name)) {
+        if (this.hasUpgrade(upgrade.id)) {
             return;
         }
 
-        this.upgrades[upgrade.name] = upgrade;
+        this.upgrades[upgrade.id] = upgrade;
     }
 }

@@ -39,8 +39,8 @@ class Requirement {
             return true;
         }
         let hasAllupgrades = true;
-        for (let upgrade of this.requirements.upgrades) {
-            hasAllupgrades &= this.game.hasUpgrade(upgrade);
+        for (let upgradeId of this.requirements.upgrades) {
+            hasAllupgrades &= this.game.hasUpgrade(upgradeId);
         }
         return hasAllupgrades;
     }
