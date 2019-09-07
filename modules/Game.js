@@ -15,13 +15,7 @@ class Game extends Module {
         this.modifiers = [];
         this.upgrades = {};
 
-        // Max hunger means you are completely full. 0 hunger means you are starving.
-        this.vals = {
-            [Values.maxHunger]: 100,
-            [Values.maxHungerModifier]: 1.5,
-            [Values.minHungerModifier]: 0.5,
-            [Values.nourishment]: 2.0,
-        };
+        this.vals = DefaultValues;
         this.addModule(new HungerModule(this))
     }
 
@@ -36,22 +30,20 @@ class Game extends Module {
     }
 
     gainResource(amount) {
-        for (let module of this.modules) {
-            amount = module.gainResource(amount);
-        }
+        const yields = this.yields();
         for (let [name, quantity] of Object.entries(amount)) {
-            this[name] += quantity;
+            this[name] += quantity * yields[name];
         }
     }
 
     val(valName) {
         let finalModifier = 1;
         for (let modifier of this.modifiers) {
-            finalModifier *= modifier.getModifier(valName)
+            finalModifier *= modifier.getModifier(valName);
         }
 
         for (let upgrade of Object.values(this.upgrades)) {
-            finalModifier *= upgrade.modifiers.getModifier(valName)
+            finalModifier *= upgrade.modifiers.getModifier(valName);
         }
         return this.vals[valName] * finalModifier;
     }
@@ -69,7 +61,9 @@ class Game extends Module {
             result = module.gainResource(result);
         }
 
-        //TODO apply other simple modifiers
+        for (let resource of Object.values(Resources)) {
+            result[resource] *= this.val(`${resource}Modifier`);
+        }
         return result;
     }
 

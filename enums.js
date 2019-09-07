@@ -41,4 +41,21 @@ const Values = {
     maxHungerModifier: 'maxHungerModifier',
     minHungerModifier: 'minHungerModifier',
     nourishment: 'nourishment',
+
+    // All resource modifiers must follow this naming convention.
+    woodModifier: 'woodModifier',
+    foodModifier: 'foodModifier',
+    hungerModifier: 'hungerModifier',
+    hutsModifier: 'hutsModifier',
+};
+
+const DefaultValues = {
+    [Values.maxHunger]: 100,
+    [Values.maxHungerModifier]: 1.5,
+    [Values.minHungerModifier]: 0.5,
+    [Values.nourishment]: 2.0,
+    [Values.foodModifier]: 1.0,
+    [Values.woodModifier]: 1.0,
+    [Values.hutsModifier]: 1.0,
+    [Values.hungerModifier]: 1.0,
 };

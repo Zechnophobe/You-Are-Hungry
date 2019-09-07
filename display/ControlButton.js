@@ -46,9 +46,7 @@ class ControlButton {
         if (this.costs.pay()) {
             this.action();
         }
-        this.element.tooltip('hide');
         this.render();
-        this.element.tooltip('show');
     }
 
 }
