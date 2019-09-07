@@ -1,16 +1,12 @@
 class ControlButton {
 	
-	constructor(game) {
+	constructor(game, {name='', element="", costs=[]}) {
 		this.game = game;
-		this.config();
-		this.setup()
-	}
-	
-	config() {
 		this.costs = [];
-		this.name = "";
+		this.name = name;
 		this.isVisible = false;
-		this.element = ""
+		this.element = element;
+		this.setup()
 	}
 	
 	setup() {
@@ -57,14 +53,43 @@ class ControlButton {
 
 }
 
+class UpgradeButton extends ControlButton {
+	constructor(game, upgrade, element) {
+		super(game, {element, name: upgrade.name});
+		this.upgrade = upgrade;
+		this.isVisible = false;
+	}
+
+	action () {
+		this.upgrade.purchase();
+		this.element.tooltip('hide');
+		this.isVisible = false;
+	}
+
+	shouldActivate() {
+		return this.upgrade.requirements.met() && !this.upgrade.purchased;
+	}
+
+	onPress() {
+		if (this.upgrade.costs.canBePayed()) {
+			this.action();
+		}
+		this.render();
+	}
+
+
+	tooltip() {
+		return this.upgrade.description + '<br>' + this.upgrade.costs.str();
+	}
+}
+
 
 class ForageButton extends ControlButton {
-	config() {
+	constructor(game) {
+		super(game, {name: "Forage For Food", element: $(Elements.forageButton)});
 		this.costs = new ResourceCost(this.game, {});
-		this.name = "Forage For Food";
 		this.requirement = [];
 		this.isVisible = true;
-		this.element = $(Elements.forageButton);
 	}
 	
 	action() {
@@ -80,13 +105,12 @@ class ForageButton extends ControlButton {
 }
 
 class ChopWoodButton extends ControlButton {
-	config() {
+	constructor(game) {
+		super(game, {name: "Chop Wood", element: $(Elements.chopWoodButton)});
 		this.costs = new ResourceCost(this.game, {
 			[Resources.hunger]: 10,
 		});
-		this.name = "Chop Wood";
 		this.isVisible = false;
-		this.element = $(Elements.chopWoodButton);
 	}
 	
 	action() {
@@ -106,14 +130,13 @@ class ChopWoodButton extends ControlButton {
 }
 
 class BuildHutButton extends ControlButton {
-	config() {
+	constructor(game) {
+		super(game, {name: "Build Hut", element: $(Elements.buildHutButton)});
 		this.costs = new ResourceCost(this.game,{
 			[Resources.hunger]: 50,
 			[Resources.wood]: 10,
 		});
-		this.name = "Build Hut";
 		this.isVisible = false;
-		this.element = $(Elements.buildHutButton);
 	}
 
 	action() {

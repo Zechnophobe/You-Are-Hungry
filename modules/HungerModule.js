@@ -41,11 +41,12 @@ class HungerModule extends Module {
          * Eats at a rate that will be about 1 food consumed per second.
          */
 
+        const nourishment = this.game.val(Values.nourishment);
         const maxHunger = this.game.val(Values.maxHunger);
 	    if (this.game.hunger < maxHunger) {
 	        const foodEaten = Math.min(.1, this.game.food);
             this.game.food -= foodEaten; // Direct modification to food because it is a cost
-            this.game.hunger = Math.min(maxHunger, this.game.hunger + 2*foodEaten)
+            this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishment*foodEaten)
 
         }
     }

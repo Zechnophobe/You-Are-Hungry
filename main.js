@@ -1,5 +1,6 @@
 let game;
 let playSpeed;
+const GlobalUpgrades = [];
 const defaultPlaySpeed = 100;
 let playLoopStatus = PlayLoopStatus.playing;
 const displayElements = [];
@@ -11,6 +12,7 @@ const displayElements = [];
 
  function init() {
     game = new Game();
+    loadUpgrades(game);
     addElement(ForageButton);
     addElement(ChopWoodButton);
     addElement(FoodDisplay);
@@ -18,6 +20,8 @@ const displayElements = [];
     addElement(GameTierDisplay);
     addElement(BuildHutButton);
     addElement(HutsDisplay);
+
+    displayElements.push(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
     render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;
  }
@@ -44,4 +48,10 @@ const displayElements = [];
     for (let element of displayElements) {
         element.render();
     }
+ }
+
+ function loadUpgrades(game) {
+     for (let upgradeParams of simpleUpgrades) {
+         GlobalUpgrades.push(new Upgrade(game, upgradeParams));
+     }
  }

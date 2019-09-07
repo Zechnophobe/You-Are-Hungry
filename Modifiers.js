@@ -19,32 +19,6 @@ class Modifier {
     }
 }
 
-class Upgrade {
-    constructor(game) {
-        this.game = game;
-        this.setMeUp();
-    }
-
-    setMeUp() {
-        this.costs = [];
-        this.requirements = [];
-        this.modifier = undefined;
-        this.purchased = false;
-    }
-
-    available() {
-        return !this.purchased; // TODO Should actually check all requirements
-    }
-
-    purchase() {
-        if (this.costs.pay()) {
-            this.purchased = true;
-            return true;
-        }
-    }
-
-
-}
 
 class BowlUpgrade extends Upgrade {
     setMeUp() {

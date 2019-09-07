@@ -7,6 +7,7 @@ const Elements = {
     hutsDisplay: '#huts-display',
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
+    upgradeList: '#upgrade-list',
 };
 
 const PlayLoopStatus = {
@@ -21,12 +22,12 @@ const GameTiers = {
     cold: 'Cold',
 };
 
-const TierOrder = [
-    GameTiers.hungry,
-    GameTiers.cold,
-    GameTiers.lonely,
-    GameTiers.sad,
-];
+const TierOrder = {
+    [GameTiers.hungry]: 1,
+    [GameTiers.cold]: 2,
+    [GameTiers.lonely]: 3,
+    [GameTiers.sad]: 4,
+};
 
 const Resources = {
     hunger: 'hunger',
@@ -36,7 +37,8 @@ const Resources = {
 };
 
 const Values = {
-  maxHunger: 'maxHunger',
-  maxHungerModifier: 'maxHungerModifier',
-  minHungerModifier: 'minHungerModifier',
+    maxHunger: 'maxHunger',
+    maxHungerModifier: 'maxHungerModifier',
+    minHungerModifier: 'minHungerModifier',
+    nourishment: 'nourishment',
 };
