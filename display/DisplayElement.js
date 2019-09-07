@@ -1,131 +1,133 @@
 class DisplayElement {
-	constructor(module) {
-		this.setMeUp();
-		this.module = module;
-		this.element = $(this.elementId);
-	}
-	setMeUp() {
-		// Because javascript doesn't have class variables;
+    constructor(module) {
+        this.setMeUp();
+        this.module = module;
+        this.element = $(this.elementId);
+    }
 
-		this.elementId = '';
-	}
-	
-	render() {
-		
-	}
+    setMeUp() {
+        // Because javascript doesn't have class variables;
+
+        this.elementId = '';
+    }
+
+    render() {
+
+    }
 }
 
 class GameTierDisplay extends DisplayElement {
-	setMeUp() {
-		this.elementId = Elements.gameTierDisplay;
-	}
+    setMeUp() {
+        this.elementId = Elements.gameTierDisplay;
+    }
 
-	render() {
-		this.element.text('You are ' + this.module.tier);
-	}
+    render() {
+        this.element.text('You are ' + this.module.tier);
+    }
 }
 
 class CounterDisplay extends DisplayElement {
-	setMeUp() {
-		this.elementId = '';
-		this.counterName = '';
-		this.on = false;
-	}
+    setMeUp() {
+        this.elementId = '';
+        this.counterName = '';
+        this.on = false;
+    }
 
-	counterValue() {
-		return 0;
-	}
+    counterValue() {
+        return 0;
+    }
 
-	shouldRender() {
-		const result =  this.on || this.counterValue() > 0;
-		this.on = result;
-		return result;
-	}
+    shouldRender() {
+        const result = this.on || this.counterValue() > 0;
+        this.on = result;
+        return result;
+    }
 
-	render() {
-		if (this.shouldRender()) {
-			this.element.show();
-			this.element.text(this.counterName + ': ' + this.counterValue().toFixed(2));
-		} else {
-			this.element.hide();
-		}
+    render() {
+        if (this.shouldRender()) {
+            this.element.show();
+            this.element.text(this.counterName + ': ' + this.counterValue().toFixed(2));
+        } else {
+            this.element.hide();
+        }
 
-	}
+    }
 }
 
 class FoodDisplay extends CounterDisplay {
-	setMeUp() {
-		this.elementId = Elements.foodDisplay;
-		this.counterName = 'Food';
-	}
+    setMeUp() {
+        this.elementId = Elements.foodDisplay;
+        this.counterName = 'Food';
+    }
 
-	counterValue() {
-		return this.module.food;
-	}
+    counterValue() {
+        return this.module.food;
+    }
 
-	
+
 }
 
 
 class ChopWoodDisplay extends CounterDisplay {
-	setMeUp() {
-		this.elementId = Elements.chopWoodDisplay;
-		this.counterName = 'Wood';
-	}
+    setMeUp() {
+        this.elementId = Elements.chopWoodDisplay;
+        this.counterName = 'Wood';
+    }
 
-	counterValue() {
-		return this.module.wood;
-	}
-	
+    counterValue() {
+        return this.module.wood;
+    }
+
 }
 
 
 class HutsDisplay extends CounterDisplay {
-	setMeUp() {
-		this.elementId = Elements.hutsDisplay;
-		this.counterName = 'Hut';
-	}
+    setMeUp() {
+        this.elementId = Elements.hutsDisplay;
+        this.counterName = 'Hut';
+    }
 
-	counterValue() {
-		return this.module.huts;
-	}
+    counterValue() {
+        return this.module.huts;
+    }
 
 }
 
 class ProgressBarDisplay extends DisplayElement {
-	constructor(module) {
-		super(module);
-		this.progressElement = $(this.elementId +' .progress-bar');
-	}
-	// value from 0 to 1 that represents how full the bar is.
-	getPercentageDecimal() {
-		return 0.0;
-	}
+    constructor(module) {
+        super(module);
+        this.progressElement = $(this.elementId + ' .progress-bar');
+    }
 
-	shouldRender() {
-		return true;
-	}
+    // value from 0 to 1 that represents how full the bar is.
+    getPercentageDecimal() {
+        return 0.0;
+    }
 
-	render() {
-		if (this.shouldRender()) {
-			this.element.show();
-			const percent = this.getPercentageDecimal() * 100; //convert to percentage
-			const style = percent + '%';
-			this.progressElement.css("width", style);
-		} else {
-			this.element.hide();
-		}
+    shouldRender() {
+        return true;
+    }
 
-	}
+    render() {
+        if (this.shouldRender()) {
+            this.element.show();
+            const percent = this.getPercentageDecimal() * 100; //convert to percentage
+            const style = percent + '%';
+            this.progressElement.css("width", style);
+        } else {
+            this.element.hide();
+        }
+
+    }
 }
 
 class HungerBarDisplay extends ProgressBarDisplay {
 
-	setMeUp() {
-		this.elementId = Elements.hungerProgress;
-	}
+    setMeUp() {
+        this.elementId = Elements.hungerProgress;
+    }
 
-	getPercentageDecimal() {
-		return this.module.hungerPercentage();
-	}
+    getPercentageDecimal() {
+        return this.module.hungerPercentage();
+    }
 }

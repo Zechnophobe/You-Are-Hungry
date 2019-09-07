@@ -3,7 +3,7 @@ class Cost {
      * Represents how much sonething costs.
      */
 
-    pay(){
+    pay() {
         // What happens when you pay the cost
         // Return true if cost is successfully paid, otherwise return false
     }

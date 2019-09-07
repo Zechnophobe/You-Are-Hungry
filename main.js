@@ -5,12 +5,12 @@ const defaultPlaySpeed = 100;
 let playLoopStatus = PlayLoopStatus.playing;
 const displayElements = [];
 
- $(document).ready( function () {
+$(document).ready(function () {
     init();
     startPlayLoop();
- });
+});
 
- function init() {
+function init() {
     game = new Game();
     loadUpgrades(game);
     addElement(ForageButton);
@@ -24,34 +24,34 @@ const displayElements = [];
     displayElements.push(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
     render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;
- }
+}
 
- function addElement(elementClass, module = game) {
+function addElement(elementClass, module = game) {
     displayElements.push(new elementClass(module))
- }
+}
 
- function startPlayLoop() {
+function startPlayLoop() {
 
-    setInterval(function() {
+    setInterval(function () {
         onLoop();
     }, playSpeed);
- }
+}
 
- function onLoop() {
+function onLoop() {
     if (playLoopStatus === PlayLoopStatus.playing) {
         render();
         game.tick();
     }
- }
+}
 
- function render() {
+function render() {
     for (let element of displayElements) {
         element.render();
     }
- }
+}
 
- function loadUpgrades(game) {
-     for (let upgradeParams of simpleUpgrades) {
-         GlobalUpgrades.push(new Upgrade(game, upgradeParams));
-     }
- }
+function loadUpgrades(game) {
+    for (let upgradeParams of simpleUpgrades) {
+        GlobalUpgrades.push(new Upgrade(game, upgradeParams));
+    }
+}

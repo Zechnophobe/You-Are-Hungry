@@ -8,18 +8,20 @@ class Module {
         this.game = game;
     }
 
-	gainResource(amount) {
-		return amount;
-	}
+    gainResource(amount) {
+        return amount;
+    }
 
-	tick() {}
+    tick() {
+    }
 
-	load(saveObject) {}
+    load(saveObject) {
+    }
 
-	save() {
-		return {
-			...this,
-		}
-	}
+    save() {
+        return {
+            ...this,
+        }
+    }
 
 }
