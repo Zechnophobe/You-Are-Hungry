@@ -20,6 +20,8 @@ function init() {
     addElement(GameTierDisplay);
     addElement(BuildHutButton);
     addElement(HutsDisplay);
+    addElement(InviteFriendButton);
+    addElement(FriendsDisplay);
 
     displayElements.push(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
     render(); // Do a single initial render without waiting for the play loop

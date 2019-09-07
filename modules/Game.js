@@ -27,6 +27,9 @@ class Game extends Module {
         if (this.hunger >= this.val(Values.maxHunger) && this.tier === GameTiers.hungry) {
             this.tier = GameTiers.cold;
         }
+        if (this.huts >= 1 && this.tier === GameTiers.cold) {
+            this.tier = GameTiers.lonely;
+        }
     }
 
     gainResource(amount) {

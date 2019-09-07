@@ -43,10 +43,14 @@ class HungerModule extends Module {
 
         const nourishment = this.game.val(Values.nourishment);
         const maxHunger = this.game.val(Values.maxHunger);
+        const biteSize = this.game.val(Values.biteSize);
+        const peopleToFeed = 1 + this.game.friends;
+        const fullMeal = biteSize * peopleToFeed;
         if (this.game.hunger < maxHunger) {
-            const foodEaten = Math.min(.1, this.game.food);
-            this.game.food -= foodEaten; // Direct modification to food because it is a cost
-            this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishment * foodEaten)
+            const totalFoodEaten = Math.min(fullMeal, this.game.food);
+            this.game.food -= totalFoodEaten; // Direct modification to food because it is a cost
+            const fullMealRatio = totalFoodEaten / fullMeal;
+            this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishment * biteSize * fullMealRatio);
 
         }
     }

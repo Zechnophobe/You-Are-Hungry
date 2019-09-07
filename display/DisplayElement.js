@@ -84,11 +84,24 @@ class ChopWoodDisplay extends CounterDisplay {
 class HutsDisplay extends CounterDisplay {
     setMeUp() {
         this.elementId = Elements.hutsDisplay;
-        this.counterName = 'Hut';
+        this.counterName = 'Huts';
     }
 
     counterValue() {
         return this.module.huts;
+    }
+
+}
+
+
+class FriendsDisplay extends CounterDisplay {
+    setMeUp() {
+        this.elementId = Elements.friendsDisplay;
+        this.counterName = 'Friends';
+    }
+
+    counterValue() {
+        return this.module.friends;
     }
 
 }

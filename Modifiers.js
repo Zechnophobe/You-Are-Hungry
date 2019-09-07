@@ -18,12 +18,3 @@ class Modifier {
         return modifier;
     }
 }
-
-
-class BowlUpgrade extends Upgrade {
-    setMeUp() {
-        super.setMeUp();
-        this.costs = [new WoodCost(this.game, 2)];
-        this.modifer = new Modifier({biteSize: 1.5}, 'wood bowl')
-    }
-}

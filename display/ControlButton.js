@@ -152,3 +152,28 @@ class BuildHutButton extends ControlButton {
     }
 
 }
+
+class InviteFriendButton extends ControlButton {
+    constructor(game) {
+        super(game, {name: "Invite Friend", element: $(Elements.inviteFriendButton)});
+        this.costs = new ResourceCost(this.game, {
+            [Resources.food]: 75,
+        });
+        this.isVisible = false;
+    }
+
+    action() {
+        this.game.gainResource({[Resources.friends]: 1});
+    }
+
+    shouldActivate() {
+        return this.game.tier === GameTiers.lonely;
+    }
+
+    tooltip() {
+        let message = super.tooltip();
+        message = `Invite ${this.game.yields().friends.toFixed(0)} friends to live in spare huts<br>${message}`;
+        return message;
+    }
+
+}
