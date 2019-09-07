@@ -50,7 +50,8 @@ class HungerModule extends Module {
             const totalFoodEaten = Math.min(fullMeal, this.game.food);
             this.game.food -= totalFoodEaten; // Direct modification to food because it is a cost
             const fullMealRatio = totalFoodEaten / fullMeal;
-            this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishment * biteSize * fullMealRatio);
+            const nourishmentGain = nourishment * biteSize * fullMealRatio;
+            this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishmentGain);
 
         }
     }

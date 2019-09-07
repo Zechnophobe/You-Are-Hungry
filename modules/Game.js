@@ -30,6 +30,9 @@ class Game extends Module {
         if (this.huts >= 1 && this.tier === GameTiers.cold) {
             this.tier = GameTiers.lonely;
         }
+        if (this.friends >= 1 && this.tier === GameTiers.lonely) {
+            this.tier = GameTiers.overworked;
+        }
     }
 
     gainResource(amount) {

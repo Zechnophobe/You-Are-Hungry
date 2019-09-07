@@ -4,7 +4,7 @@ const simpleUpgrades = [
     ['Reinforced Apron', 'reinforced-apron', 'An apron, now with the power of TREE CORPSES. +75% Food Foraged', {[Resources.food]: 45, [Resources.wood]: 20 }, {resources: {[Resources.food]: 30}, tier: GameTiers.cold, upgrades: ['foraging-apron']}, {[Values.foodModifier]: 1.75}, undefined],
     ['Wooden Bowl', 'wood-bowl', 'A nice bowl to eat from. Food is 50% more nourishing', {[Resources.wood]: 4}, {tier: GameTiers.cold}, {[Values.nourishment]: 1.5}, undefined],
     ['HardWood Bowl', 'hard-wood-bowl', 'An even better bowl. Food is 50% more nourishing', {[Resources.wood]: 40}, {tier: GameTiers.cold, upgrades: ['wood-bowl']}, {[Values.nourishment]: 1.5}, undefined],
-    ['Ebonwood Bowl', 'ebon-wood-bowl', 'An even better bowl. Food is 100% more nourishing', {[Resources.wood]: 100}, {tier: GameTiers.cold, upgrades: ['hard-wood-bowl']}, {[Values.nourishment]: 2.0}, undefined],
+    ['Ebonwood Bowl', 'ebon-wood-bowl', 'An even betterer bowl. Food is 100% more nourishing', {[Resources.wood]: 100}, {tier: GameTiers.cold, upgrades: ['hard-wood-bowl']}, {[Values.nourishment]: 2.0}, undefined],
     ['Basic Axe', 'basic-axe', 'Use wood to make an axe to chop even MORE wood! +50% wood chopped', {[Resources.wood]: 8}, {tier: GameTiers.cold}, {[Values.woodModifier]: 1.5}, undefined],
     ['Advanced Axe', 'advanced-axe', 'Like the basic one, but more choppy. +50% wood chopped!', {[Resources.wood]: 65}, {tier: GameTiers.cold, upgrades: ['basic-axe']}, {[Values.woodModifier]: 1.5}, undefined],
 ];

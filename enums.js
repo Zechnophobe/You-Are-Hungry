@@ -22,13 +22,14 @@ const GameTiers = {
     sad: 'Sad',
     lonely: 'Lonely',
     cold: 'Cold',
+    overworked: 'Overworked',
 };
 
 const TierOrder = {
     [GameTiers.hungry]: 1,
     [GameTiers.cold]: 2,
     [GameTiers.lonely]: 3,
-    [GameTiers.sad]: 4,
+    [GameTiers.overworked]: 4,
 };
 
 const Resources = {
