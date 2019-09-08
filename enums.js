@@ -12,6 +12,7 @@ const Elements = {
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
     upgradeList: '#upgrade-list',
+    displayList: '#display-list',
 
     trainFarmerButton: '#train-farmer-button',
     displayFarmersButton: '#display-farmers-button',
@@ -81,3 +82,27 @@ const DefaultValues = {
     [Values.housingModifier]: 1,
     [Values.farmerModifier]: 1,
 };
+
+
+const GameResources = [
+    {
+        name: 'Food',
+        id: 'food',
+    },
+    {
+        name: 'Wood',
+        id: 'wood',
+    },
+    {
+        name: 'Friends',
+        id: 'friends',
+    },
+    {
+        name: 'Huts',
+        id: 'huts',
+    },
+    {
+        name: 'Farms',
+        id: 'farms',
+    },
+];

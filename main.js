@@ -15,16 +15,12 @@ function init() {
     loadUpgrades(game);
     addElement(ForageButton);
     addElement(ChopWoodButton);
-    addElement(FoodDisplay);
-    addElement(ChopWoodDisplay);
-    addElement(GameTierDisplay);
     addElement(BuildHutButton);
-    addElement(HutsDisplay);
     addElement(BuildFarmButton);
-    addElement(FarmsDisplay);
     addElement(InviteFriendButton);
-    addElement(FriendsDisplay);
+    addElement(GameTierDisplay);
 
+    displayElements.push(new DisplayView(game, Elements.displayList, GameResources));
     displayElements.push(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
     render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;

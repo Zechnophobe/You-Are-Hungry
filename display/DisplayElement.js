@@ -1,14 +1,7 @@
 class DisplayElement {
-    constructor(module) {
-        this.setMeUp();
+    constructor(module, elementId) {
         this.module = module;
-        this.element = $(this.elementId);
-    }
-
-    setMeUp() {
-        // Because javascript doesn't have class variables;
-
-        this.elementId = '';
+        this.element = $(elementId);
     }
 
     render() {
@@ -17,8 +10,8 @@ class DisplayElement {
 }
 
 class GameTierDisplay extends DisplayElement {
-    setMeUp() {
-        this.elementId = Elements.gameTierDisplay;
+    constructor(game) {
+        super(game, Elements.gameTierDisplay)
     }
 
     render() {
@@ -27,9 +20,10 @@ class GameTierDisplay extends DisplayElement {
 }
 
 class CounterDisplay extends DisplayElement {
-    setMeUp() {
-        this.elementId = '';
-        this.counterName = '';
+
+    constructor(game, elementId, counterName) {
+        super(game, elementId);
+        this.counterName = counterName;
         this.on = false;
     }
 
@@ -54,75 +48,21 @@ class CounterDisplay extends DisplayElement {
     }
 }
 
-class FoodDisplay extends CounterDisplay {
-    setMeUp() {
-        this.elementId = Elements.foodDisplay;
-        this.counterName = 'Food';
+class ResourceCounter extends CounterDisplay {
+    constructor(game, elementId, resource) {
+        super(game, elementId, resource.name);
+        this.resourceId = resource.id;
     }
 
     counterValue() {
-        return this.module.food;
+        return this.module[this.resourceId]
     }
-
-
-}
-
-
-class ChopWoodDisplay extends CounterDisplay {
-    setMeUp() {
-        this.elementId = Elements.chopWoodDisplay;
-        this.counterName = 'Wood';
-    }
-
-    counterValue() {
-        return this.module.wood;
-    }
-
-}
-
-
-class HutsDisplay extends CounterDisplay {
-    setMeUp() {
-        this.elementId = Elements.hutsDisplay;
-        this.counterName = 'Huts';
-    }
-
-    counterValue() {
-        return this.module.huts;
-    }
-
-}
-
-
-class FarmsDisplay extends CounterDisplay {
-    setMeUp() {
-        this.elementId = Elements.farmsDisplay;
-        this.counterName = 'Farms';
-    }
-
-    counterValue() {
-        return this.module.farms;
-    }
-
-}
-
-
-class FriendsDisplay extends CounterDisplay {
-    setMeUp() {
-        this.elementId = Elements.friendsDisplay;
-        this.counterName = 'Friends';
-    }
-
-    counterValue() {
-        return this.module.friends;
-    }
-
 }
 
 class ProgressBarDisplay extends DisplayElement {
-    constructor(module) {
-        super(module);
-        this.progressElement = $(this.elementId + ' .progress-bar');
+    constructor(module, elementId) {
+        super(module, elementId);
+        this.progressElement = $(elementId + ' .progress-bar');
     }
 
     // value from 0 to 1 that represents how full the bar is.
@@ -149,8 +89,8 @@ class ProgressBarDisplay extends DisplayElement {
 
 class HungerBarDisplay extends ProgressBarDisplay {
 
-    setMeUp() {
-        this.elementId = Elements.hungerProgress;
+    constructor(game) {
+        super(game, Elements.hungerProgress);
     }
 
     getPercentageDecimal() {
