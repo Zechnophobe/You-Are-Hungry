@@ -67,6 +67,17 @@ class UpgradeButton extends ControlButton {
     shouldActivate() {
         return this.upgrade.requirements.met() && !this.upgrade.purchased;
     }
+	
+	render() {
+		super.render();
+		if (this.upgrade.costs.canBePayed()) {
+			this.element.addClass('btn-primary');
+			this.element.removeClass('btn-warning');
+		} else {
+			this.element.addClass('btn-warning');
+			this.element.removeClass('btn-primary');
+		}
+	}
 
     onPress() {
         if (this.upgrade.costs.canBePayed()) {
