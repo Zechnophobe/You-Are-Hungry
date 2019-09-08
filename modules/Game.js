@@ -14,9 +14,25 @@ class Game extends Module {
         this.modules = [];
         this.modifiers = [];
         this.upgrades = {};
+        this.land = 50;
+        this.farms = 0;
+        this.farmers = 0;
+
 
         this.vals = DefaultValues;
         this.addModule(new HungerModule(this))
+    }
+
+    housing() {
+        return this.huts * this.val(Values.housingModifier) - this.friends - this.farmers;
+    }
+
+    freeLand() {
+        return this.land - this.huts;
+    }
+
+    freeFarms() {
+        return this.farms - this.farmers;
     }
 
     // What computes every game increment

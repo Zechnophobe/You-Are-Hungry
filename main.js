@@ -20,6 +20,8 @@ function init() {
     addElement(GameTierDisplay);
     addElement(BuildHutButton);
     addElement(HutsDisplay);
+    addElement(BuildFarmButton);
+    addElement(FarmsDisplay);
     addElement(InviteFriendButton);
     addElement(FriendsDisplay);
 

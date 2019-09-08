@@ -153,17 +153,82 @@ class BuildHutButton extends ControlButton {
 
 }
 
+class BuildFarmButton extends ControlButton {
+    constructor(game) {
+        super(game, {name: "Build Farm", element: $(Elements.buildFarmButton)});
+        this.costs = new CompositeCost(game, [
+            new ResourceCost(this.game, {
+                [Resources.wood]: 100,
+            }),
+            new CallbackCost(game, 1,  () => {
+                return this.game.freeLand();
+            }, 'You need at least 1 unoccupied space.'),
+        ]);
+        this.isVisible = false;
+    }
+
+    action() {
+        this.game.gainResource({[Resources.farms]: 1});
+    }
+
+    shouldActivate() {
+        return this.game.tier === GameTiers.overworked;
+    }
+
+    tooltip() {
+        let message = super.tooltip();
+        message = 'Build ' + this.game.yields().farms.toFixed(2) + ' farms to feed your friends<br>' + message;
+        return message;
+    }
+
+}
+
 class InviteFriendButton extends ControlButton {
     constructor(game) {
         super(game, {name: "Invite Friend", element: $(Elements.inviteFriendButton)});
-        this.costs = new ResourceCost(this.game, {
-            [Resources.food]: 75,
-        });
+        this.costs = new CompositeCost(game, [
+            new ResourceCost(this.game, {
+                [Resources.food]: 75,
+            }),
+            new CallbackCost(game, 1,  () => {
+                return this.game.housing();
+            }, 'You need at least 1 free housing per friend.'),
+        ]);
         this.isVisible = false;
     }
 
     action() {
         this.game.gainResource({[Resources.friends]: 1});
+    }
+
+    shouldActivate() {
+        return this.game.tier === GameTiers.lonely;
+    }
+
+    tooltip() {
+        let message = super.tooltip();
+        message = `Invite ${this.game.yields().friends.toFixed(0)} friends to live in spare huts<br>${message}`;
+        return message;
+    }
+
+}
+
+class TrainFarmerButton extends ControlButton {
+    constructor(game) {
+        super(game, {name: "Train Farmer", element: $(Elements.trainFarmerButton)});
+        this.costs = new CompositeCost(game, [
+            new ResourceCost(this.game, {
+                [Resources.friends]: 1,
+            }),
+            new CallbackCost(game, 1,  () => {
+                return this.game.freeFarms();
+            }, 'You need at least 1 unused farm per farmer.'),
+        ]);
+        this.isVisible = false;
+    }
+
+    action() {
+        this.game.gainResource({[Resources.farmer]: 1});
     }
 
     shouldActivate() {

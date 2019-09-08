@@ -94,6 +94,19 @@ class HutsDisplay extends CounterDisplay {
 }
 
 
+class FarmsDisplay extends CounterDisplay {
+    setMeUp() {
+        this.elementId = Elements.farmsDisplay;
+        this.counterName = 'Farms';
+    }
+
+    counterValue() {
+        return this.module.farms;
+    }
+
+}
+
+
 class FriendsDisplay extends CounterDisplay {
     setMeUp() {
         this.elementId = Elements.friendsDisplay;

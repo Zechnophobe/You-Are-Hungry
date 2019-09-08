@@ -2,14 +2,19 @@ const Elements = {
     forageButton: "#forage-button",
     chopWoodButton: "#chop-wood-button",
     buildHutButton: "#build-hut-button",
+    buildFarmButton: "#build-farm-button",
     inviteFriendButton: "#invite-friend-button",
     foodDisplay: '#food-display',
     chopWoodDisplay: '#chop-wood-display',
     hutsDisplay: '#huts-display',
+    farmsDisplay: '#farms-display',
     friendsDisplay: '#friends-display',
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
     upgradeList: '#upgrade-list',
+
+    trainFarmerButton: '#train-farmer-button',
+    displayFarmersButton: '#display-farmers-button',
 };
 
 const PlayLoopStatus = {
@@ -37,7 +42,10 @@ const Resources = {
     food: 'food',
     wood: 'wood',
     huts: 'huts',
+    farms: 'farms',
     friends: 'friends',
+    housing: 'housing',
+    farmer: 'farmer',
 };
 
 const Values = {
@@ -52,7 +60,10 @@ const Values = {
     foodModifier: 'foodModifier',
     hungerModifier: 'hungerModifier',
     hutsModifier: 'hutsModifier',
+    farmsModifier: 'farmsModifier',
     friendsModifier: 'friendsModifier',
+    housingModifier: 'housingModifier',
+    farmerModifier: 'farmerModifier',
 };
 
 const DefaultValues = {
@@ -63,7 +74,10 @@ const DefaultValues = {
     [Values.foodModifier]: 1.0,
     [Values.woodModifier]: 1.0,
     [Values.hutsModifier]: 1.0,
+    [Values.farmsModifier]: 1.0,
     [Values.hungerModifier]: 1.0,
     [Values.friendsModifier]: 1.0,
     [Values.biteSize]: 0.1,
+    [Values.housingModifier]: 1,
+    [Values.farmerModifier]: 1,
 };
