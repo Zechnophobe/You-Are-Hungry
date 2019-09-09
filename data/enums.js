@@ -42,6 +42,9 @@ const Values = {
     friendsModifier: 'friendsModifier',
     housingModifier: 'housingModifier',
     farmerModifier: 'farmerModifier',
+
+    //Friend modifiers
+    farmFoodModifier: 'farmFoodModifier',
 };
 
 const DefaultValues = {

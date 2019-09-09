@@ -20,7 +20,7 @@ class Game extends Module {
 
 
         this.vals = DefaultValues;
-        this.addModule(new HungerModule(this))
+        this.addModule(new HungerModule(this));
     }
 
     housing() {
@@ -33,6 +33,10 @@ class Game extends Module {
 
     freeFarms() {
         return this.farms - this.farmers;
+    }
+
+    allFriends() {
+        return this.friends + this.farmers;
     }
 
     // What computes every game increment
@@ -48,6 +52,7 @@ class Game extends Module {
         }
         if (this.friends >= 1 && this.tier === GameTiers.lonely) {
             this.tier = GameTiers.overworked;
+            this.addModule(new FriendModule(this));
         }
     }
 
