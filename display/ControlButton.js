@@ -1,10 +1,11 @@
 class ControlButton {
 
-    constructor(game, name = '', selector) {
+    constructor(game, name = '', selector, requirement) {
         this.game = game;
         this.name = name;
         this.isVisible = false;
         this.element = $(selector);
+        this.requirement = requirement || new Requirement(this.game);
         this.setup()
     }
 
@@ -15,7 +16,7 @@ class ControlButton {
     }
 
     shouldActivate() {
-        return true;
+        return (this.requirement === undefined) || this.requirement.met();
     }
 
     tooltip() {
@@ -25,7 +26,6 @@ class ControlButton {
     render() {
         if (this.shouldActivate()) {
             this.isVisible = true;
-            this.element.show();
         }
         this.element.text(this.name);
         if (this.isVisible) {
@@ -50,8 +50,8 @@ class ControlButton {
 
 class CostedButton extends ControlButton {
 	
-	constructor(game, name = '', selector, costs) {
-		super(game, name, selector);
+	constructor(game, name = '', selector, costs, requirement) {
+		super(game, name, selector, requirement);
 		this.costs = costs || new Cost();
 	}
 
@@ -83,7 +83,8 @@ class CostedButton extends ControlButton {
 
 class UpgradeButton extends CostedButton {
     constructor(game, upgrade, selector) {
-        super(game, upgrade.name, selector, upgrade.costs);
+        super(game, upgrade.name, `${selector} .btn`, upgrade.costs);
+        this.listElement = $(selector);
         this.upgrade = upgrade;
     }
 
@@ -91,10 +92,6 @@ class UpgradeButton extends CostedButton {
         this.upgrade.purchase();
         this.element.tooltip('hide');
         this.isVisible = false;
-    }
-
-    shouldActivate() {
-        return this.upgrade.requirements.met() && !this.upgrade.purchased;
     }
 	
     onPress() {
@@ -109,18 +106,24 @@ class UpgradeButton extends CostedButton {
         const tip = super.tooltip();
         return `${this.upgrade.description}<br>${tip}`;
     }
+
+    render() {
+        super.render();
+        if (this.upgrade.purchased) {
+            this.listElement.hide();
+        } else {
+            if (this.upgrade.available()) {
+                this.listElement.show();
+            }
+        }
+    }
 }
 
 class ResourceButton extends CostedButton {
     constructor(game, name, selector, costs, resourceId, amount = 1, requirement) {
-        super(game, name, selector, costs);
-        this.requirement = requirement || new Requirement();
+        super(game, name, selector, costs, requirement);
         this.resourceId = resourceId;
         this.amount = amount;
-    }
-
-    shouldActivate() {
-        return (this.requirement === undefined) || this.requirement.met();
     }
 
     action() {

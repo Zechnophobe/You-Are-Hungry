@@ -7,22 +7,29 @@ class DisplayView {
         this.init();
     }
 
-    init() {
-        /**
-         * Initial render that adds the list items to the DOM.
-         */
+    generateHtml() {
         let html = '';
         for (let display of this.displays) {
             const displayElementId = this.generateElementId(display);
             html += this.template(displayElementId);
         }
         this.element.html(html);
+    }
+    init() {
+        /**
+         * Initial render that adds the list items to the DOM.
+         */
+        this.generateHtml();
 
         // Now create the per resource displays
         for (let display of this.displays) {
-            this.subDisplays.push(new ResourceCounter(this.game, `#${this.generateElementId(display)}`, display));
+            this.subDisplays.push(this.generateElement(display));
         }
 
+    }
+
+    generateElement(display) {
+        return new ResourceCounter(this.game, `#${this.generateElementId(display)}`, display);
     }
 
     generateElementId(display) {

@@ -13,6 +13,7 @@ const Elements = {
     hungerProgress: '#hunger-progress',
     upgradeList: '#upgrade-list',
     displayList: '#display-list',
+    buttonDisplay: '#button-display',
 
     trainFarmerButton: '#train-farmer-button',
     displayFarmersButton: '#display-farmers-button',

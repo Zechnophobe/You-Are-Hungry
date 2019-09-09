@@ -13,11 +13,9 @@ $(document).ready(function () {
 function init() {
     game = new Game();
     loadUpgrades(game);
-    for (let button of ResourceButtons) {
-        addElement(new ResourceButton(game, button.name, button.element, makeCost(game, button.costs), button.resource.id, button.amount, new Requirement(game, button.requirement)));
-    }
     addElement(new GameTierDisplay(game));
 
+    addElement(new ButtonDisplay(game, Elements.buttonDisplay, ResourceButtons));
     addElement(new DisplayView(game, Elements.displayList, GameResources));
     addElement(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
     render(); // Do a single initial render without waiting for the play loop
