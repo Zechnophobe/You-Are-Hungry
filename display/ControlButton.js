@@ -128,12 +128,7 @@ class ResourceButton extends CostedButton {
     }
 
     action() {
-        this.game.gainResource(this.resourceId, this.amount, this.modifierName);
-    }
-
-    tooltip() {
-        let message = super.tooltip();
-        message = `Gain ${(this.amount * this.game.val(this.modifierName)).toFixed(2)} ${this.resourceId}<br>${message}`;
-        return message;
+        const gained = this.game.gainResource(this.resourceId, this.amount, this.modifierName);
+        this.game.getRandomBonusLoot(gained, this.resourceId);
     }
 }

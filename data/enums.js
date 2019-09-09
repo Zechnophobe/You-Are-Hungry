@@ -4,6 +4,7 @@ const Elements = {
     upgradeList: '#upgrade-list',
     displayList: '#display-list',
     buttonDisplay: '#button-display',
+    actionDisplay: '#action-display',
 };
 
 const PlayLoopStatus = {
@@ -17,13 +18,25 @@ const GameTiers = {
     lonely: 'Lonely',
     cold: 'Cold',
     overworked: 'Overworked',
+    unobtainable: 'unobtainable',
 };
+
+const LootLevels = {
+    legendary: 'legendary',
+    common: 'common',
+    rare: 'rare',
+    uncommon: 'uncommon',
+}
 
 const TierOrder = {
     [GameTiers.hungry]: 1,
     [GameTiers.cold]: 2,
     [GameTiers.lonely]: 3,
     [GameTiers.overworked]: 4,
+
+
+
+    [GameTiers.unobtainable]: 999,
 };
 
 const Values = {
@@ -46,6 +59,13 @@ const Values = {
     //Friend modifiers
     farmFoodModifier: 'farmFoodModifier',
     chopWoodModifier: 'chopWoodModifier',
+
+    //Rarity Values
+    legendaryModifier: 'legendaryModifier',
+    rareModifier: 'rareModifier',
+    uncommonModifier: 'uncommonModifier',
+
+    bonusModifier: 'bonusModifier',
 };
 
 const DefaultValues = {
@@ -62,4 +82,9 @@ const DefaultValues = {
     [Values.biteSize]: 0.1,
     [Values.housingModifier]: 1,
     [Values.farmerModifier]: 1,
+
+    [Values.legendaryModifier]: .002,
+    [Values.rareModifier]: .01,
+    [Values.uncommonModifier]: .04,
+
 };
