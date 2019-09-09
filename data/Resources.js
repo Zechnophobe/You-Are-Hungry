@@ -121,7 +121,7 @@ const ResourceButtons = [
         costs: {
             resource: {
                 [Resources.wood.id]: 300,
-                [Resources.hunger.id]: 100,
+                [Resources.hunger.id]: 95,
             },
             callback: [1, 'freeLand', 'You need at least 1 unoccupied space.'],
         },
