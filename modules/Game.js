@@ -17,6 +17,8 @@ class Game extends Module {
         this.land = 50;
         this.farms = 0;
         this.farmers = 0;
+        this.woodcutters = 0;
+        this.sheds = 0;
 
 
         this.vals = DefaultValues;
@@ -24,7 +26,7 @@ class Game extends Module {
     }
 
     housing() {
-        return this.huts * this.val(Values.housingModifier) - this.friends - this.farmers;
+        return this.huts * this.val(Values.housingModifier) - this.allFriends();
     }
 
     freeLand() {
@@ -35,8 +37,12 @@ class Game extends Module {
         return this.farms - this.farmers;
     }
 
+    freeWoodcutters() {
+        return this.sheds - this.woodcutters;
+    }
+
     allFriends() {
-        return this.friends + this.farmers;
+        return this.friends + this.farmers + this.woodcutters;
     }
 
     // What computes every game increment

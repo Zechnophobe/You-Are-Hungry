@@ -45,6 +45,7 @@ const Values = {
 
     //Friend modifiers
     farmFoodModifier: 'farmFoodModifier',
+    chopWoodModifier: 'chopWoodModifier',
 };
 
 const DefaultValues = {

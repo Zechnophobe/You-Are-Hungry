@@ -37,6 +37,9 @@ class HungerModule extends Module {
          * Consumes food from the stock to replenish your hunger bar
          * Eats at a rate that will be about 1 food consumed per second.
          */
+        if (this.game.food <= 0) {
+            return;
+        }
 
         const nourishment = this.game.val(Values.nourishment);
         const maxHunger = this.game.val(Values.maxHunger);
@@ -45,9 +48,11 @@ class HungerModule extends Module {
         const fullMeal = biteSize * peopleToFeed;
         if (this.game.hunger < maxHunger) {
             const totalFoodEaten = Math.min(fullMeal, this.game.food);
-            this.game.food -= totalFoodEaten; // Direct modification to food because it is a cost
             const fullMealRatio = totalFoodEaten / fullMeal;
             const nourishmentGain = nourishment * biteSize * fullMealRatio;
+            const nourishmentNeeded = maxHunger - this.game.hunger;
+            const nourishNeededRatio = Math.min(nourishmentNeeded / nourishmentGain, 1);
+            this.game.food -= totalFoodEaten * nourishNeededRatio; // Only eat as much food as would fill you
             this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishmentGain);
 
         }

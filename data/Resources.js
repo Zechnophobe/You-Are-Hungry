@@ -27,6 +27,14 @@ const Resources = {
         name: 'Farmers',
         id: 'farmers',
     },
+    sheds: {
+        name: 'Sheds',
+        id: 'sheds',
+    },
+    woodcutters: {
+        name: 'Woodcutters',
+        id: 'woodcutters',
+    },
 };
 
 // All Resources on this list get a little display area
@@ -36,7 +44,9 @@ const GameResources = [
     Resources.friends,
     Resources.huts,
     Resources.farms,
+    Resources.sheds,
     Resources.farmers,
+    Resources.woodcutters,
 ];
 
 const ResourceButtons = [
@@ -82,6 +92,19 @@ const ResourceButtons = [
         requirement: {tier: GameTiers.overworked}
     },
     {
+        resource: Resources.sheds,
+        name: 'Build A Wood Shed',
+        amount: 1,
+        costs: {
+            resource: {
+                [Resources.wood.id]: 75,
+                [Resources.hunger.id]: 25,
+            },
+            callback: [1, 'freeLand', 'You need at least 1 unoccupied space.'],
+        },
+        requirement: {tier: GameTiers.overworked}
+    },
+    {
         resource: Resources.friends,
         name: 'Invite A Friend',
         amount: 1,
@@ -102,6 +125,18 @@ const ResourceButtons = [
                 [Resources.friends.id]: 1,
             },
             callback: [1, 'freeFarms', 'You need at least 1 farm per farmer.'],
+        },
+        requirement: {tier: GameTiers.overworked}
+    },
+    {
+        resource: Resources.woodcutters,
+        name: 'Train a Woodcutter',
+        amount: 1,
+        costs: {
+            resource: {
+                [Resources.friends.id]: 1,
+            },
+            callback: [1, 'freeWoodcutters', 'You need at least 1 wood shed per woodcutter.'],
         },
         requirement: {tier: GameTiers.overworked}
     },
