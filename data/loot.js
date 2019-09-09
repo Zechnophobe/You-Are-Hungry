@@ -31,7 +31,7 @@ const foodLoot = {
 
 const commonFriendLootNames = ['a friend from high school', 'that one guy who maintains too much eye contact', 'some random person off the street', 'an old acquaintance', 'that girl who always posts MLM scams online', 'a shadowy figure with no name'];
 const uncommonFriendLootNames = ['Eustace, you remember him right?', 'Cecelia, she always liked to build things', 'Gregor, everyone used to like him', 'Mary-Sue, annoyingly good at everything'];
-const rareFriendLootNames = ['Tiffany, or was it Brittany?', 'Sancho. Why? Because he is Sancho!'];
+const rareFriendLootNames = ['Tiffany, or was it Brittany?', 'Sancho. Why? Because he is Sancho!', 'Patrick, destroyer of gallons of ice cream'];
 
 const friendLoot = {
     [LootLevels.common]: [

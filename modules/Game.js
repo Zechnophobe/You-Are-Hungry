@@ -33,8 +33,12 @@ class Game extends Module {
         return this.huts * this.val(Values.housingModifier) - this.allFriends();
     }
 
+    allBuildings() {
+        return this.huts + this.farms + this.offices;
+    }
+
     freeLand() {
-        return this.land - this.huts;
+        return this.land - this.allBuildings();
     }
 
     freeFarms() {
