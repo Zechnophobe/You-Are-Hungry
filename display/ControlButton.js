@@ -123,16 +123,17 @@ class ResourceButton extends CostedButton {
     constructor(game, name, selector, costs, resourceId, amount = 1, requirement) {
         super(game, name, selector, costs, requirement);
         this.resourceId = resourceId;
+        this.modifierName = `${this.resourceId}Modifier`;
         this.amount = amount;
     }
 
     action() {
-        this.game.gainResource({[this.resourceId]: this.amount});
+        this.game.gainResource(this.resourceId, this.amount, this.modifierName);
     }
 
     tooltip() {
         let message = super.tooltip();
-        message = `Gain ${(this.amount * this.game.yields()[this.resourceId]).toFixed(2)} ${this.resourceId}<br>${message}`;
+        message = `Gain ${(this.amount * this.game.val(this.modifierName)).toFixed(2)} ${this.resourceId}<br>${message}`;
         return message;
     }
 }

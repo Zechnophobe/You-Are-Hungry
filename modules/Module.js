@@ -8,15 +8,15 @@ class Module {
         this.game = game;
     }
 
-    gainResource(amount) {
-        return amount;
+    // Get a value from this module
+    // Defaults to 1 since most val's are modifiers.
+    val(valueName) {
+        return 1;
     }
 
-    tick() {
-    }
+    tick() {}
 
-    load(saveObject) {
-    }
+    load(saveObject) {}
 
     save() {
         return {

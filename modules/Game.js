@@ -51,11 +51,9 @@ class Game extends Module {
         }
     }
 
-    gainResource(amount) {
-        const yields = this.yields();
-        for (let [name, quantity] of Object.entries(amount)) {
-            this[name] += quantity * yields[name];
-        }
+
+    gainResource(resourceId, amount, modifierType) {
+        this[resourceId] += amount * this.val(modifierType);
     }
 
     val(valName) {
@@ -64,29 +62,15 @@ class Game extends Module {
             finalModifier *= modifier.getModifier(valName);
         }
 
+        // Apply all modules to modifiers
+        for (let module of this.modules) {
+            finalModifier *= module.val(valName);
+        }
+
         for (let upgrade of Object.values(this.upgrades)) {
             finalModifier *= upgrade.modifiers.getModifier(valName);
         }
-        return this.vals[valName] * finalModifier;
-    }
-
-    yields() {
-        let result = {};
-
-        // Default all modifiers to 1
-        for (let resource of Object.values(Resources)) {
-            result[resource.id] = 1;
-        }
-
-        // Apply all modules to modifiers
-        for (let module of this.modules) {
-            result = module.gainResource(result);
-        }
-
-        for (let resource of Object.values(Resources)) {
-            result[resource.id] *= (this.val(`${resource.id}Modifier`) || 1);
-        }
-        return result;
+        return (this.vals[valName] || 1) * finalModifier;
     }
 
     load(saveObject) {
@@ -112,4 +96,9 @@ class Game extends Module {
 
         this.upgrades[upgrade.id] = upgrade;
     }
+}
+
+
+function doTheThing() {
+    // Get upgrades related to `thing`
 }
