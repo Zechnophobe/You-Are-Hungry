@@ -1,4 +1,4 @@
-//[name, description, costs, requirements, modifiers, icon]
+//[name, id, description, costs, requirements, modifiers, icon]
 const simpleUpgrades = [
     ['Foraging Apron', 'foraging-apron', 'Helps you forage better. Made of Food. You don\'t want to know how that works. +25% Food Foraged', {[Resources.food.id]: 20}, {resources: {[Resources.food.id]: 10}}, {[Values.foodModifier]: 1.25}, undefined],
     ['Reinforced Apron', 'reinforced-apron', 'An apron, now with the power of TREE CORPSES. +75% Food Foraged', {[Resources.food.id]: 45, [Resources.wood.id]: 20 }, {resources: {[Resources.food.id]: 30}, tier: GameTiers.cold, upgrades: ['foraging-apron']}, {[Values.foodModifier]: 1.75}, undefined],

@@ -13,8 +13,8 @@ $(document).ready(function () {
 function init() {
     game = new Game();
     loadUpgrades(game);
-    addElement(new GameTierDisplay(game));
 
+    addElement(new GameTierDisplay(game));
     addElement(new ButtonDisplay(game, Elements.buttonDisplay, ResourceButtons));
     addElement(new DisplayView(game, Elements.displayList, GameResources));
     addElement(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));

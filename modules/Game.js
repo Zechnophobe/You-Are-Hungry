@@ -1,5 +1,5 @@
 /**
- * A Game object represents the game state state
+ * A Game object represents the game state
  * It is responsible for interactions with that state
  */
 class Game extends Module {
@@ -26,7 +26,7 @@ class Game extends Module {
         this.vals = DefaultValues;
         this.addModule(new HungerModule(this));
 
-        this.actionElement = $(Elements.actionDisplay);
+        this.actionElement = $(Elements.actionDisplay); //TODO break into view.
     }
 
     housing() {
@@ -76,7 +76,7 @@ class Game extends Module {
 
 
     gainResource(resourceId, amount, modifierType) {
-        const totalGained = amount * this.val(modifierType)
+        const totalGained = amount * this.val(modifierType);
         this[resourceId] += totalGained;
         return totalGained;
     }

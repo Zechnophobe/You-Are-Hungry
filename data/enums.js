@@ -7,6 +7,8 @@ const Elements = {
     actionDisplay: '#action-display',
 };
 
+const You = 1;
+
 const PlayLoopStatus = {
     playing: 'playing',
     stopped: 'stopped',
