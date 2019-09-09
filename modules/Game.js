@@ -133,7 +133,7 @@ class Game extends Module {
                 }
             }
         }
-        let message = `Got ${lootName} worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
+        let message = `Got ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
         this.updateActionElement(message)
     }
 
