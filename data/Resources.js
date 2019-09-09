@@ -35,6 +35,14 @@ const Resources = {
         name: 'Woodcutters',
         id: 'woodcutters',
     },
+    offices: {
+        name: 'Construction Offices',
+        id: 'offices',
+    },
+    constructors: {
+        name: 'Constructors',
+        id: 'constructors',
+    },
 };
 
 // All Resources on this list get a little display area
@@ -47,6 +55,8 @@ const GameResources = [
     Resources.sheds,
     Resources.farmers,
     Resources.woodcutters,
+    Resources.offices,
+    Resources.constructors,
 ];
 
 const ResourceButtons = [
@@ -105,6 +115,19 @@ const ResourceButtons = [
         requirement: {tier: GameTiers.overworked}
     },
     {
+        resource: Resources.offices,
+        name: 'Build A construction office',
+        amount: 1,
+        costs: {
+            resource: {
+                [Resources.wood.id]: 300,
+                [Resources.hunger.id]: 100,
+            },
+            callback: [1, 'freeLand', 'You need at least 1 unoccupied space.'],
+        },
+        requirement: {tier: GameTiers.overworked}
+    },
+    {
         resource: Resources.friends,
         name: 'Invite A Friend',
         amount: 1,
@@ -137,6 +160,18 @@ const ResourceButtons = [
                 [Resources.friends.id]: 1,
             },
             callback: [1, 'freeWoodcutters', 'You need at least 1 wood shed per woodcutter.'],
+        },
+        requirement: {tier: GameTiers.overworked}
+    },
+    {
+        resource: Resources.constructors,
+        name: 'Train a construction worker',
+        amount: 1,
+        costs: {
+            resource: {
+                [Resources.friends.id]: 1,
+            },
+            callback: [1, 'freeConstructors', 'You need at least 1 construction office per construction worker.'],
         },
         requirement: {tier: GameTiers.overworked}
     },

@@ -26,7 +26,7 @@ const LootLevels = {
     common: 'common',
     rare: 'rare',
     uncommon: 'uncommon',
-}
+};
 
 const TierOrder = {
     [GameTiers.hungry]: 1,
@@ -66,6 +66,9 @@ const Values = {
     uncommonModifier: 'uncommonModifier',
 
     bonusModifier: 'bonusModifier',
+
+    //Cost Modifiers
+    hungerCostModifier: 'hungerCostModifier',
 };
 
 const DefaultValues = {

@@ -18,7 +18,17 @@ class FriendModule extends Module {
             this.game.hunger -= hungerCost;
             this.game.gainResource(Resources.wood.id, howMuch, Values.chopWoodModifier);
         }
+    }
 
+    val(valName) {
+        if (valName === Values.hungerCostModifier) {
+            return this.hungerCostReductionFromConstructors()
+        }
+        return 1;
+    }
+
+    hungerCostReductionFromConstructors() {
+        return 1.0 / ((this.game.constructors) + 1)
 
     }
 }

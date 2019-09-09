@@ -13,7 +13,7 @@ function makeCost(game, costs) {
 
 class Cost {
     /**
-     * Represents how much sonething costs.
+     * Represents how much something costs.
      */
 
     pay() {
@@ -61,13 +61,18 @@ class ResourceCost extends Cost {
     str() {
         let message = '';
         for (let [name, amount] of this.costs()) {
-            message += 'requires <b>' + amount + '</b> ' + name + '<br>';
+            message += `requires <b>${amount.toFixed(2)}</b> ${name}<br>`;
         }
         return message;
     }
 
     costs() {
-        return Object.entries(this.amount);
+        const costs = Object.entries(this.amount);
+        const result = [];
+        for (let [name, amount] of costs) {
+            result.push([name, amount * this.game.val(`${name}CostModifier`)]);
+        }
+        return result;
     }
 }
 

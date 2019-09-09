@@ -10,6 +10,7 @@ class ControlButton {
     }
 
     setup() {
+        this.element.text(this.name);
         this.element.on('click', () => {
             this.onPress();
         })
@@ -27,7 +28,6 @@ class ControlButton {
         if (this.shouldActivate()) {
             this.isVisible = true;
         }
-        this.element.text(this.name);
         if (this.isVisible) {
             this.element.show();
             this.element.attr('data-original-title', this.tooltip());
