@@ -3,6 +3,10 @@ const Resources = {
         name: 'Food',
         id: 'food',
     },
+    hunger: {
+        name: 'Hunger',
+        id: 'hunger',
+    },
     wood: {
         name: 'Wood',
         id: 'wood',
@@ -25,12 +29,14 @@ const Resources = {
     },
 };
 
+// All Resources on this list get a little display area
 const GameResources = [
     Resources.food,
     Resources.wood,
     Resources.friends,
     Resources.huts,
     Resources.farms,
+    Resources.farmers,
 ];
 
 const ResourceButtons = [
@@ -46,7 +52,7 @@ const ResourceButtons = [
         name: 'Chop Wood',
         amount: 1,
         costs: {
-            resource: {[ResourceNames.hunger]: 10},
+            resource: {[Resources.hunger.id]: 10},
         },
         requirement: {tier: GameTiers.cold},
     },
@@ -56,8 +62,8 @@ const ResourceButtons = [
         amount: 1,
         costs: {
             resource: {
-                [ResourceNames.hunger]: 50,
-                [ResourceNames.wood]: 10,
+                [Resources.hunger.id]: 50,
+                [Resources.wood.id]: 10,
             },
         },
         requirement: {tier: GameTiers.cold}
@@ -68,8 +74,8 @@ const ResourceButtons = [
         amount: 1,
         costs: {
             resource: {
-                [ResourceNames.wood]: 100,
-                [ResourceNames.hunger]: 75,
+                [Resources.wood.id]: 100,
+                [Resources.hunger.id]: 75,
             },
             callback: [1, 'freeLand', 'You need at least 1 unoccupied space.'],
         },
@@ -81,10 +87,22 @@ const ResourceButtons = [
         amount: 1,
         costs: {
             resource: {
-                [ResourceNames.food]: 75,
+                [Resources.food.id]: 75,
             },
             callback: [1, 'housing', 'You need at least 1 free housing per friend.'],
         },
         requirement: {tier: GameTiers.lonely}
+    },
+    {
+        resource: Resources.farmers,
+        name: 'Train a Farmer',
+        amount: 1,
+        costs: {
+            resource: {
+                [Resources.friends.id]: 1,
+            },
+            callback: [1, 'freeFarms', 'You need at least 1 farm per farmer.'],
+        },
+        requirement: {tier: GameTiers.overworked}
     },
 ];

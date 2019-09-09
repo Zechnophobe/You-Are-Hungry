@@ -1,22 +1,9 @@
 const Elements = {
-    forageButton: "#forage-button",
-    chopWoodButton: "#chop-wood-button",
-    buildHutButton: "#build-hut-button",
-    buildFarmButton: "#build-farm-button",
-    inviteFriendButton: "#invite-friend-button",
-    foodDisplay: '#food-display',
-    chopWoodDisplay: '#chop-wood-display',
-    hutsDisplay: '#huts-display',
-    farmsDisplay: '#farms-display',
-    friendsDisplay: '#friends-display',
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
     upgradeList: '#upgrade-list',
     displayList: '#display-list',
     buttonDisplay: '#button-display',
-
-    trainFarmerButton: '#train-farmer-button',
-    displayFarmersButton: '#display-farmers-button',
 };
 
 const PlayLoopStatus = {
@@ -37,17 +24,6 @@ const TierOrder = {
     [GameTiers.cold]: 2,
     [GameTiers.lonely]: 3,
     [GameTiers.overworked]: 4,
-};
-
-const ResourceNames = {
-    hunger: 'hunger',
-    food: 'food',
-    wood: 'wood',
-    huts: 'huts',
-    farms: 'farms',
-    friends: 'friends',
-    housing: 'housing',
-    farmer: 'farmer',
 };
 
 const Values = {

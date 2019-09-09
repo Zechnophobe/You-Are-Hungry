@@ -2,7 +2,7 @@ class HungerModule extends Module {
     constructor(game) {
         super(game);
 
-        this.hungerModifiedResources = [ResourceNames.food, ResourceNames.wood];
+        this.hungerModifiedResources = [Resources.food, Resources.wood];
         addElement(new HungerBarDisplay(this));
     }
 
@@ -20,8 +20,8 @@ class HungerModule extends Module {
 
     gainResource(amount) {
         for (let resource of this.hungerModifiedResources) {
-            if (amount[resource] !== undefined) {
-                amount[resource] = this.modifyResource(amount[resource])
+            if (amount[resource.id] !== undefined) {
+                amount[resource.id] = this.modifyResource(amount[resource.id])
             }
         }
         return amount;
