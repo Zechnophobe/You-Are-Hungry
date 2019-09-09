@@ -38,7 +38,7 @@ const TierOrder = {
     [GameTiers.overworked]: 4,
 };
 
-const Resources = {
+const ResourceNames = {
     hunger: 'hunger',
     food: 'food',
     wood: 'wood',
@@ -82,27 +82,3 @@ const DefaultValues = {
     [Values.housingModifier]: 1,
     [Values.farmerModifier]: 1,
 };
-
-
-const GameResources = [
-    {
-        name: 'Food',
-        id: 'food',
-    },
-    {
-        name: 'Wood',
-        id: 'wood',
-    },
-    {
-        name: 'Friends',
-        id: 'friends',
-    },
-    {
-        name: 'Huts',
-        id: 'huts',
-    },
-    {
-        name: 'Farms',
-        id: 'farms',
-    },
-];

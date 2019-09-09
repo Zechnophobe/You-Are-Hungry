@@ -2,8 +2,8 @@ class HungerModule extends Module {
     constructor(game) {
         super(game);
 
-        this.hungerModifiedResources = [Resources.food, Resources.wood];
-        addElement(HungerBarDisplay, this);
+        this.hungerModifiedResources = [ResourceNames.food, ResourceNames.wood];
+        addElement(new HungerBarDisplay(this));
     }
 
     modifyResource(amount) {

@@ -25,7 +25,7 @@ class UpgradeView {
         // Now cache the upgrade elements
         for (let upgrade of this.upgrades) {
             this.upgradeElements[upgrade.id] = $(upgradeElementIds[upgrade.id]);
-            displayElements.push(new UpgradeButton(game, upgrade, $(`${upgradeElementIds[upgrade.id]} .btn`)));
+            displayElements.push(new UpgradeButton(game, upgrade, `${upgradeElementIds[upgrade.id]} .btn`));
         }
 
     }

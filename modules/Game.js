@@ -74,7 +74,7 @@ class Game extends Module {
         let result = {};
 
         // Default all modifiers to 1
-        for (let resource of Object.values(Resources)) {
+        for (let resource of Object.values(ResourceNames)) {
             result[resource] = 1;
         }
 
@@ -83,7 +83,7 @@ class Game extends Module {
             result = module.gainResource(result);
         }
 
-        for (let resource of Object.values(Resources)) {
+        for (let resource of Object.values(ResourceNames)) {
             result[resource] *= this.val(`${resource}Modifier`);
         }
         return result;

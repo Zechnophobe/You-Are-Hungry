@@ -7,7 +7,7 @@ class Requirement {
 
     constructor(game, requirements) {
         this.game = game;
-        this.requirements = requirements;
+        this.requirements = requirements || {};
     }
 
     met() {

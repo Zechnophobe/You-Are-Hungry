@@ -1,3 +1,16 @@
+function makeCost(game, costs) {
+    const allCosts = [];
+    if (costs.resource) {
+        allCosts.push(new ResourceCost(game, costs.resource));
+    }
+    if (costs.callback) {
+        allCosts.push(new CallbackCost(game, ...costs.callback));
+    }
+
+    return new CompositeCost(game, allCosts);
+
+}
+
 class Cost {
     /**
      * Represents how much sonething costs.
@@ -6,14 +19,17 @@ class Cost {
     pay() {
         // What happens when you pay the cost
         // Return true if cost is successfully paid, otherwise return false
+        return true;
     }
 
     canBePayed() {
         // Pre condition to pay cost
+        return true;
     }
 
     str() {
         // Returns a string representing communication of the cost to the player.
+        return '';
     }
 
     constructor(game, amount) {
@@ -77,16 +93,23 @@ class CallbackCost extends Cost {
         this.message = message;
     }
 
+    call(callback) {
+        if (callback === undefined) {
+            return true;
+        }
+        if (typeof callback === 'string') {
+            return this.game[callback]()
+        }
+        return callback();
+    }
+
     canBePayed() {
-        return this.callback() >= this.amount;
+        return this.call(this.callback) >= this.amount;
     }
 
     pay() {
         if (this.canBePayed()) {
-            if (this.payCallBack !== undefined) {
-                return this.payCallBack();
-            }
-            return true;
+            return this.call(this.payCallBack);
         }
 
         return false;

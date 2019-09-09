@@ -13,21 +13,19 @@ $(document).ready(function () {
 function init() {
     game = new Game();
     loadUpgrades(game);
-    addElement(ForageButton);
-    addElement(ChopWoodButton);
-    addElement(BuildHutButton);
-    addElement(BuildFarmButton);
-    addElement(InviteFriendButton);
-    addElement(GameTierDisplay);
+    for (let button of ResourceButtons) {
+        addElement(new ResourceButton(game, button.name, button.element, makeCost(game, button.costs), button.resource.id, button.amount, new Requirement(game, button.requirement)));
+    }
+    addElement(new GameTierDisplay(game));
 
-    displayElements.push(new DisplayView(game, Elements.displayList, GameResources));
-    displayElements.push(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
+    addElement(new DisplayView(game, Elements.displayList, GameResources));
+    addElement(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
     render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;
 }
 
-function addElement(elementClass, module = game) {
-    displayElements.push(new elementClass(module))
+function addElement(element) {
+    displayElements.push(element)
 }
 
 function startPlayLoop() {
