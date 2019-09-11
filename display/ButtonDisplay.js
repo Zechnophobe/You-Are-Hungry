@@ -1,7 +1,4 @@
 class ButtonDisplay extends DisplayView {
-    constructor(game, element, displays) {
-        super(game, element, displays);
-    }
 
     generateElementId(display) {
         return `button-display-${display.resource.id}`;

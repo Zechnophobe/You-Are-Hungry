@@ -28,7 +28,7 @@ class FriendModule extends Module {
     }
 
     hungerCostReductionFromConstructors() {
-        return 1.0 / ((this.game.constructors) + 1)
+        return 1.0 / ((this.game.constructors) + You)
 
     }
 }
