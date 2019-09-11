@@ -12,6 +12,7 @@ const simpleUpgrades = [
 ];
 
 const lootUpgrades = {
-    luckyDevil: ['Tasty fries make everything better', 'lucky-devil', 'You\'ll never forget your luck. +15% more uncommon drops', {}, {tier: GameTiers.unobtainable}, {[Values.uncommonModifier]: 1.15}, undefined],
-    doozerPower: ['She is a real doozer', 'doozer-power', 'Impresses all your woodcutters to cut 25% faster', {}, {tier: GameTiers.unobtainable}, {[Values.chopWoodModifier]: 1.25}, undefined],
+    ['lucky-devil']: ['Tasty fries make everything better', 'lucky-devil', 'You\'ll never forget your luck. +15% more uncommon drops', {}, {tier: GameTiers.unobtainable}, {[Values.uncommonModifier]: 1.15}, undefined],
+    ['doozer-power']: ['She is a real doozer', 'doozer-power', 'Impresses all your woodcutters to cut 25% faster', {}, {tier: GameTiers.unobtainable}, {[Values.chopWoodModifier]: 1.25}, undefined],
+    ['always-watching']: ['A super creeeeeepy doll. Like dude. Seriously', 'always-watching','You keep finding this creepy puppet on your bed, no matter how many times you put it away. Maybe it\'s lucky?', {}, {tier: GameTiers.unobtainable}, {[Values.rareModifier]: 1.25}, undefined],
 };

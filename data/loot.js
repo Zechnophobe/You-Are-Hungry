@@ -24,9 +24,41 @@ const foodLoot = {
         {
             name: 'a ... holy heck, is that a warm, freshly salted, bag of french fries?!',
             bonus: {[Resources.food.id]: 100},
-            upgrade: 'luckyDevil',
+            upgrade: 'lucky-devil',
         },
     ],
+};
+
+const commonWoodLootNames = ['a rocking horse no one was using.', 'a canoe washed up on shore, no oars', 'a wardrobe that may have led to a magical realm, but is now kindling', 'a tidy pile of driftwood.'];
+const uncommonWoodLootNames = ['a previously felled tree', 'a piano that was too out of tune to use', 'someone\'s front door. Say Hi!', 'a baby crib. A little baby prison.'];
+const rareWoodLootNames = ['A dog house. The dog had moved on to better places. Nicer places.', 'an intricately carved totem'];
+
+const woodLoot = {
+    [LootLevels.common]: [
+        {
+            name: commonWoodLootNames,
+            bonus: {}
+        }
+    ],
+    [LootLevels.uncommon]: [
+        {
+            name: uncommonWoodLootNames,
+            bonus: {[Resources.wood.id]: 3},
+        }
+    ],
+    [LootLevels.rare]: [
+        {
+            name: rareWoodLootNames,
+            bonus: {[Resources.wood.id]: 20},
+        }
+    ],
+    [LootLevels.legendary]: [
+        {
+            name: 'a Creepy Wooden puppet. Its eyes follow you wherever you go.',
+            bonus: {[Resources.wood.id]: 50},
+            upgrade: 'always-watching'
+        }
+    ]
 };
 
 const commonFriendLootNames = ['a friend from high school', 'that one guy who maintains too much eye contact', 'some random person off the street', 'an old acquaintance', 'that girl who always posts MLM scams online', 'a shadowy figure with no name'];
@@ -59,11 +91,12 @@ const friendLoot = {
         {
             name: 'Rasa, the hard worker! Now you can finally get some stuff done around here. ',
             bonus: {[Resources.food.id]: 100},
-            upgrade: 'doozerPower',
+            upgrade: 'doozer-power',
         },
     ],
 };
 const Loot = {
     [Resources.food.id]: foodLoot,
     [Resources.friends.id]: friendLoot,
+    [Resources.wood.id]: woodLoot,
 };
