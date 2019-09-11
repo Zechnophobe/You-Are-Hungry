@@ -71,6 +71,9 @@ const Values = {
 
     //Cost Modifiers
     hungerCostModifier: 'hungerCostModifier',
+
+    //Hut Modifiers
+    hutSpaceModifier: 'hutSpaceModifier',
 };
 
 const DefaultValues = {
@@ -87,6 +90,7 @@ const DefaultValues = {
     [Values.biteSize]: 0.1,
     [Values.housingModifier]: 1,
     [Values.farmerModifier]: 1,
+    [Values.hutSpaceModifier]: 1,
 
     [Values.legendaryModifier]: .002,
     [Values.rareModifier]: .01,

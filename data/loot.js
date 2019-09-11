@@ -57,7 +57,7 @@ const friendLoot = {
     ],
     [LootLevels.legendary]: [
         {
-            name: 'Rasa the hard worker! Now you can finally get some stuff done around here. ',
+            name: 'Rasa, the hard worker! Now you can finally get some stuff done around here. ',
             bonus: {[Resources.food.id]: 100},
             upgrade: 'doozerPower',
         },
