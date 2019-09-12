@@ -27,7 +27,7 @@ class Game extends Module {
 
         this.vals = DefaultValues;
 
-        this.set('tier', GameTiers.hungry);
+        this.tierController = new HungryTier(this);
         this.set(Resources.hunger.id, 15.0);
     }
 
@@ -68,16 +68,8 @@ class Game extends Module {
         for (let module of this.modules) {
             module.tick();
         }
-        if (this.hunger >= this.val(Values.maxHunger) && this.tier === GameTiers.hungry) {
-            this.set('tier', GameTiers.cold);
-        }
-        if (this.huts >= 1 && this.tier === GameTiers.cold) {
-            this.set('tier', GameTiers.lonely);
-        }
-        if (this.friends >= 1 && this.tier === GameTiers.lonely) {
-            this.set('tier', GameTiers.overworked);
-            this.addModule(new FriendModule(this));
-        }
+        // Check if we should move on to the next game tier.
+        this.tierController = this.tierController.progress();
     }
 
 

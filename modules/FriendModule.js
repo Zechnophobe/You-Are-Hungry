@@ -1,9 +1,15 @@
 class FriendModule extends Module {
 
+    constructor(game) {
+        super(game);
+
+        //TODO Create view for friends
+    }
+
     tick() {
         // Farmer grow food.
         this.growFood();
-        this.chopWood();
+        this.chopWood();/**/
     }
 
     growFood() {

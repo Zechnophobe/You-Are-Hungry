@@ -20,6 +20,7 @@ const GameTiers = {
     lonely: 'Lonely',
     cold: 'Cold',
     overworked: 'Overworked',
+    explore: 'Claustrophobic',
     unobtainable: 'unobtainable',
 };
 
@@ -35,6 +36,7 @@ const TierOrder = {
     [GameTiers.cold]: 2,
     [GameTiers.lonely]: 3,
     [GameTiers.overworked]: 4,
+    [GameTiers.explore]: 5,
 
 
 
