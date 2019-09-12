@@ -7,6 +7,8 @@ class Game extends Module {
         super(null);
 
         this.modules = [];
+        this.modifiers = [];
+        this.upgrades = {};
         new GameTierDisplay(this, Elements.gameTierDisplay, 'tier');
         new CounterView(this, Elements.displayList, GameResources);
         this.addModule(new HungerModule(this));
@@ -14,8 +16,6 @@ class Game extends Module {
         this.wood = 0;
         this.huts = 0;
         this.friends = 0;
-        this.modifiers = [];
-        this.upgrades = {};
         this.land = 50;
         this.farms = 0;
         this.farmers = 0;
@@ -28,7 +28,7 @@ class Game extends Module {
         this.vals = DefaultValues;
 
         this.set('tier', GameTiers.hungry);
-        this.set('hunger', 15.0);
+        this.set(Resources.hunger.id, 15.0);
     }
 
     housing() {
