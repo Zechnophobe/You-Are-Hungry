@@ -1,11 +1,12 @@
 class ControlButton {
 
-    constructor(game, name = '', selector, requirement) {
+    constructor(game, name = '', selector, requirement, callback=undefined) {
         this.game = game;
         this.name = name;
         this.isVisible = false;
         this.element = $(selector);
         this.requirement = requirement || new Requirement(this.game);
+        this.callback = callback || function(){};
         this.setup()
     }
 
@@ -38,7 +39,7 @@ class ControlButton {
     }
 
     action() {
-        // The result of the button being pressed
+        this.callback();
     }
 
     onPress() {
@@ -48,10 +49,11 @@ class ControlButton {
 
 }
 
+
 class CostedButton extends ControlButton {
 	
-	constructor(game, name = '', selector, costs, requirement) {
-		super(game, name, selector, requirement);
+	constructor(game, name = '', selector, costs, requirement, callback) {
+		super(game, name, selector, requirement, callback);
 		this.costs = costs || new Cost();
 	}
 
@@ -120,15 +122,15 @@ class UpgradeButton extends CostedButton {
 }
 
 class ResourceButton extends CostedButton {
-    constructor(game, name, selector, costs, resourceId, amount = 1, requirement) {
+    constructor(game, name, selector, costs, resource, amount = 1, requirement) {
         super(game, name, selector, costs, requirement);
-        this.resourceId = resourceId;
-        this.modifierName = `${this.resourceId}Modifier`;
+        this.resource = resource;
+        this.modifierName = `${this.resource.id}Modifier`;
         this.amount = amount;
     }
 
     action() {
-        const gained = this.game.gainResource(this.resourceId, this.amount, this.modifierName);
-        this.game.getRandomBonusLoot(gained, this.resourceId);
+        const gained = this.game.gainResource(this.resource.id, this.amount, this.modifierName);
+        this.game.getRandomBonusLoot(gained, this.resource);
     }
 }

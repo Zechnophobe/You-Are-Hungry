@@ -5,6 +5,7 @@ const Elements = {
     displayList: '#display-list',
     buttonDisplay: '#button-display',
     actionDisplay: '#action-display',
+    exploreButton: '#explore-lands',
 };
 
 const You = 1;
@@ -59,6 +60,7 @@ const Values = {
     friendsModifier: 'friendsModifier',
     housingModifier: 'housingModifier',
     farmerModifier: 'farmerModifier',
+    landModifier: 'landModifier',
 
     //Friend modifiers
     farmFoodModifier: 'farmFoodModifier',

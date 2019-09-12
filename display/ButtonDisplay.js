@@ -5,7 +5,7 @@ class ButtonDisplay extends DisplayView {
     }
 
     generateElement(display) {
-        return new ResourceButton(this.game, display.name, `#${this.generateElementId(display)}`, makeCost(this.game, display.costs), display.resource.id, display.amount, new Requirement(this.game, display.requirement));
+        return new ResourceButton(this.game, display.name, `#${this.generateElementId(display)}`, makeCost(this.game, display.costs), display.resource, display.amount, new Requirement(this.game, display.requirement));
     }
 
     template(elementId) {

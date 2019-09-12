@@ -104,10 +104,11 @@ class Game extends Module {
     }
 
 
-    getRandomBonusLoot(gained, resourceId) {
+    getRandomBonusLoot(gained, resource) {
         /**
          * Should be called after a manual action is taken to give the player some bonus loot
          */
+        const resourceId = resource.id;
         const lootLevel = this.getRarity();
         let bonusMessage = '';
         let upgradeMessage = '';
@@ -135,7 +136,8 @@ class Game extends Module {
                 }
             }
         }
-        const message = `Got ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
+        const verb = resource.verb || 'Got';
+        const message = `${verb} ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
         this.set('lastMessage', message)
     }
 
