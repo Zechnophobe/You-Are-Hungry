@@ -15,7 +15,7 @@ class FriendModule extends Module {
         const howMuch = .1 * this.game.woodcutters;
         const hungerCost = this.game.woodcutters / (this.game.allFriends() + You);
         if (this.game.hunger >= hungerCost) {
-            this.game.hunger -= hungerCost;
+            this.game.modify('hunger', -hungerCost);
             this.game.gainResource(Resources.wood.id, howMuch, Values.chopWoodModifier);
         }
     }

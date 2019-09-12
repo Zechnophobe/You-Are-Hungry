@@ -15,6 +15,7 @@ class DisplayView {
         }
         this.element.html(html);
     }
+
     init() {
         /**
          * Initial render that adds the list items to the DOM.
@@ -29,7 +30,7 @@ class DisplayView {
     }
 
     generateElement(display) {
-        return new ResourceCounter(this.game, `#${this.generateElementId(display)}`, display);
+        return new View(this.game, `#${this.generateElementId(display)}`, display);
     }
 
     generateElementId(display) {
@@ -37,12 +38,12 @@ class DisplayView {
     }
 
     render() {
-        for (let display of this.subDisplays) {
-            display.render();
+        for (let subDisplay of this.subDisplays) {
+            subDisplay.render();
         }
     }
 
     template(elementId) {
-        return `<li id='${elementId}' style='display: none;'></li>`;
+        return `<div id='${elementId}' style='display: none;'></div>`;
     }
 }

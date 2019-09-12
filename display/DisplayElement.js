@@ -1,73 +1,39 @@
-class DisplayElement {
-    constructor(module, elementId) {
-        this.module = module;
-        this.element = $(elementId);
-    }
+class GameTierDisplay extends View {
 
-    render() {
-
+    template() {
+        return `You are ${this.model.get(this.event)}`;
     }
 }
 
-class GameTierDisplay extends DisplayElement {
-    constructor(game) {
-        super(game, Elements.gameTierDisplay)
-    }
+class CounterDisplay extends View {
 
-    render() {
-        this.element.text('You are ' + this.module.tier);
-    }
-}
-
-class CounterDisplay extends DisplayElement {
-
-    constructor(game, elementId, counterName) {
-        super(game, elementId);
-        this.counterName = counterName;
+    constructor(model, elementId, event) {
+        super(model, elementId, event);
         this.on = false;
     }
 
-    counterValue() {
-        return 0;
-    }
-
     shouldRender() {
-        const result = this.on || this.counterValue() > 0;
+        const result = this.on || this.model.get(this.event) > 0;
         this.on = result;
         return result;
     }
 
-    render() {
-        if (this.shouldRender()) {
-            this.element.show();
-            this.element.text(this.counterName + ': ' + this.counterValue().toFixed(2));
-        } else {
-            this.element.hide();
-        }
-
+    template() {
+        return `${this.event}: ${this.model.get(this.event).toFixed(2)}`;
     }
 }
 
-class ResourceCounter extends CounterDisplay {
-    constructor(game, elementId, resource) {
-        super(game, elementId, resource.name);
-        this.resourceId = resource.id;
-    }
-
-    counterValue() {
-        return this.module[this.resourceId]
-    }
-}
-
-class ProgressBarDisplay extends DisplayElement {
-    constructor(module, elementId) {
-        super(module, elementId);
-        this.progressElement = $(elementId + ' .progress-bar');
+class ProgressBarDisplay extends View {
+    constructor(model, elementId, current, max) {
+        super(model, elementId, [current, max]);
+        this.progressElement = $(`${this.elementId} .progress-bar`);
+        this.current = current;
+        this.max = max;
     }
 
     // value from 0 to 1 that represents how full the bar is.
     getPercentageDecimal() {
-        return 0.0;
+        return this.model.get(this.current) / this.model.get(this.max);
     }
 
     shouldRender() {
@@ -89,11 +55,7 @@ class ProgressBarDisplay extends DisplayElement {
 
 class HungerBarDisplay extends ProgressBarDisplay {
 
-    constructor(game) {
-        super(game, Elements.hungerProgress);
-    }
-
     getPercentageDecimal() {
-        return this.module.hungerPercentage();
+        return this.model.hungerPercentage();
     }
 }

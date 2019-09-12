@@ -5,13 +5,15 @@
 class Game extends Module {
     constructor() {
         super(null);
-        this.tier = GameTiers.hungry;
+
+        this.modules = [];
+        new GameTierDisplay(this, Elements.gameTierDisplay, 'tier');
+        new CounterView(this, Elements.displayList, GameResources);
+        this.addModule(new HungerModule(this));
         this.food = 0;
         this.wood = 0;
         this.huts = 0;
-        this.hunger = 15.0;
         this.friends = 0;
-        this.modules = [];
         this.modifiers = [];
         this.upgrades = {};
         this.land = 50;
@@ -24,9 +26,9 @@ class Game extends Module {
 
 
         this.vals = DefaultValues;
-        this.addModule(new HungerModule(this));
 
-        this.actionElement = $(Elements.actionDisplay); //TODO break into view.
+        this.set('tier', GameTiers.hungry);
+        this.set('hunger', 15.0);
     }
 
     housing() {
@@ -57,19 +59,23 @@ class Game extends Module {
         return this.friends + this.farmers + this.woodcutters + this.constructors;
     }
 
+    hungerPercentage() {
+        return this.hunger / this.val(Values.maxHunger);
+    }
+
     // What computes every game increment
     tick() {
         for (let module of this.modules) {
             module.tick();
         }
         if (this.hunger >= this.val(Values.maxHunger) && this.tier === GameTiers.hungry) {
-            this.tier = GameTiers.cold;
+            this.set('tier', GameTiers.cold);
         }
         if (this.huts >= 1 && this.tier === GameTiers.cold) {
-            this.tier = GameTiers.lonely;
+            this.set('tier', GameTiers.lonely);
         }
         if (this.friends >= 1 && this.tier === GameTiers.lonely) {
-            this.tier = GameTiers.overworked;
+            this.set('tier', GameTiers.overworked);
             this.addModule(new FriendModule(this));
         }
     }
@@ -77,7 +83,7 @@ class Game extends Module {
 
     gainResource(resourceId, amount, modifierType) {
         const totalGained = amount * this.val(modifierType);
-        this[resourceId] += totalGained;
+        this.modify(resourceId, totalGained);
         return totalGained;
     }
 
@@ -137,12 +143,8 @@ class Game extends Module {
                 }
             }
         }
-        let message = `Got ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
-        this.updateActionElement(message)
-    }
-
-    updateActionElement(message) {
-        this.actionElement.html(message);
+        const message = `Got ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
+        this.set('lastMessage', message)
     }
 
     val(valName) {

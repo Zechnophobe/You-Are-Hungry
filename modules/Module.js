@@ -3,8 +3,9 @@
  * it can be added or removed from the game state
  * it acts very similarly to the game class.
  */
-class Module {
+class Module extends Model {
     constructor(game) {
+        super();
         this.game = game;
     }
 
