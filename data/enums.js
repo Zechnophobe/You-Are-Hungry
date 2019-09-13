@@ -6,6 +6,8 @@ const Elements = {
     buttonDisplay: '#button-display',
     actionDisplay: '#action-display',
     exploreButton: '#explore-lands',
+
+    messageLog: '#message-log',
 };
 
 const You = 1;

@@ -131,14 +131,16 @@ class Game extends Module {
             if (loot.upgrade) {
                 const upgrade = new Upgrade(this, lootUpgrades[loot.upgrade]);
                 if (!this.hasUpgrade(upgrade.id)) {
-                    upgradeMessage += `Free Upgrade: ${upgrade.name}`;
                     this.gainUpgrade(upgrade);
                 }
             }
         }
         const verb = resource.verb || 'Got';
-        const message = `${verb} ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
-        this.set('lastMessage', message)
+        const message = `${verb} ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage}`;
+        this.set('lastMessage', message);
+        if (loot.message) {
+            messageLog.log(loot.message);
+        }
     }
 
     val(valName) {

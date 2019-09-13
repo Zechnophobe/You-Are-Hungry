@@ -4,6 +4,7 @@ const GlobalUpgrades = [];
 const defaultPlaySpeed = 100;
 let playLoopStatus = PlayLoopStatus.playing;
 const displayElements = [];
+let messageLog;
 
 $(document).ready(function () {
     init();
@@ -11,6 +12,7 @@ $(document).ready(function () {
 });
 
 function init() {
+    messageLog = new MessageLog(Elements.messageLog);
     game = new Game();
     loadUpgrades(game);
 

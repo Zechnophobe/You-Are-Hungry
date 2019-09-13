@@ -3,6 +3,11 @@ class Tier {
         this.game = game;
         this.onEntry();
         this.game.set('tier', this.name());
+        messageLog.log(this.entryMessage());
+    }
+
+    entryMessage() {
+        return `Entering tier ${this.name()}`;
     }
 
     completionRequirements() {
@@ -47,6 +52,10 @@ class HungryTier extends Tier {
     nextTier() {
         return ColdTier;
     }
+
+    entryMessage() {
+        return `You are hungry.`;
+    }
 }
 
 class ColdTier extends Tier {
@@ -62,6 +71,10 @@ class ColdTier extends Tier {
     nextTier() {
         return LonelyTier;
     }
+
+    entryMessage() {
+        return `You filled your stomach with this and that.`;
+    }
 }
 
 class LonelyTier extends Tier {
@@ -76,6 +89,10 @@ class LonelyTier extends Tier {
 
     nextTier() {
         return OverworkedTier;
+    }
+
+    entryMessage() {
+        return `A hut will provide some insulation, and a place for a person to live.`;
     }
 }
 
@@ -96,6 +113,10 @@ class OverworkedTier extends Tier {
     onEntry() {
         this.game.addModule(new FriendModule(this.game));
     }
+
+    entryMessage() {
+        return `Friends are nice, but all they do is eat your food.`;
+    }
 }
 
 class ExploreTier extends Tier {
@@ -114,5 +135,9 @@ class ExploreTier extends Tier {
 
     onEntry() {
         this.game.addModule(new ExplorationModule(this.game));
+    }
+
+    entryMessage() {
+        return `Your friends have been put to the grindstone, but the boundaries are closing in.`;
     }
 }

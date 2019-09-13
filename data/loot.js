@@ -25,6 +25,7 @@ const foodLoot = {
             name: 'a ... holy heck, is that a warm, freshly salted, bag of french fries?!',
             bonus: {[Resources.food.id]: 100},
             upgrade: 'luckyDevil',
+            message: 'Found Legendary food: holy heck, is that a warm, freshly salted, bag of french fries?! Clearly you are a lucky devil.'
         },
     ],
 };
@@ -60,6 +61,7 @@ const friendLoot = {
             name: 'Rasa, the hard worker! Now you can finally get some stuff done around here. ',
             bonus: {[Resources.food.id]: 100},
             upgrade: 'doozerPower',
+            message: 'Legendary Friend: Rasa is a hard worker and an inspiration to everyone.'
         },
     ],
 };
