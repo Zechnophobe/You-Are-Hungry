@@ -134,13 +134,13 @@ class Game extends Module {
                     this.gainUpgrade(upgrade);
                 }
             }
+            if (loot.message) {
+                messageLog.log(loot.message);
+            }
         }
         const verb = resource.verb || 'Got';
         const message = `${verb} ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage}`;
         this.set('lastMessage', message);
-        if (loot.message) {
-            messageLog.log(loot.message);
-        }
     }
 
     val(valName) {
