@@ -2,6 +2,7 @@ const Elements = {
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
     upgradeList: '#upgrade-list',
+    completedUpgradeList: '#completed-upgrade-list',
     displayList: '#display-list',
     buttonDisplay: '#button-display',
     actionDisplay: '#action-display',

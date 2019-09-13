@@ -3,7 +3,7 @@ class MessageLog {
         this.elementId = elementId;
         this.element = $(this.elementId);
         this.maxLength = maxLength;
-        this.messages = new Array(this.maxLength).fill('');
+        this.messages = new Array(this.maxLength).fill({});
         this.messageElements = new Array(this.maxLength);
         this.init();
     }
@@ -25,8 +25,9 @@ class MessageLog {
         return `message-${index}`;
     }
 
-    log(message) {
-        this.messages.push(message);
+    log(message, model, icon) {
+        const messageObject = new Message(message, model, icon);
+        this.messages.push(messageObject);
         while (this.messages.length > this.maxLength) {
             this.messages.shift();
         }
@@ -35,7 +36,7 @@ class MessageLog {
 
     render() {
         for (let i = 0; i < this.messages.length; i++) {
-            let message = this.messages[i];
+            let message = this.messages[i].message;
             let element = this.messageElements[i];
             element.text(message);
         }
@@ -43,5 +44,13 @@ class MessageLog {
 
     template(elementId) {
         return `<div id='${elementId}' class="log-message"></div>`;
+    }
+}
+
+class Message {
+    constructor(message, model, icon) {
+        this.message = message;
+        this.model = model;
+        this.icon = icon;
     }
 }

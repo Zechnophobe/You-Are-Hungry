@@ -54,7 +54,7 @@ class HungryTier extends Tier {
     }
 
     entryMessage() {
-        return `You are hungry.`;
+        return `Your stomach is rumbling.`;
     }
 }
 
