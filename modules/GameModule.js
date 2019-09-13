@@ -9,8 +9,6 @@ class Game extends Module {
         this.modules = [];
         this.modifiers = [];
         this.upgrades = {};
-        new GameTierDisplay(this, Elements.gameTierDisplay, 'tier');
-        new CounterView(this, Elements.displayList, GameResources);
         this.addModule(new HungerModule(this));
         this.food = 0;
         this.wood = 0;
@@ -158,14 +156,6 @@ class Game extends Module {
             finalModifier *= upgrade.modifiers.getModifier(valName);
         }
         return (this.vals[valName] || 1) * finalModifier;
-    }
-
-    load(saveObject) {
-        this.tier = saveObject.tier;
-        this.food = saveObject.food;
-        this.wood = saveObject.wood;
-        this.huts = saveObject.huts;
-        this.friends = saveObject.friends;
     }
 
     addModule(module) {

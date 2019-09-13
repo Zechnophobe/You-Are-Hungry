@@ -14,11 +14,11 @@ class ControlButton {
         this.element.text(this.name);
         this.element.on('click', () => {
             this.onPress();
-        })
+        });
     }
 
     shouldActivate() {
-        return (this.requirement === undefined) || this.requirement.met();
+        return this.requirement.met();
     }
 
     tooltip() {
@@ -52,9 +52,11 @@ class ControlButton {
 
 class CostedButton extends ControlButton {
 	
-	constructor(game, name = '', selector, costs, requirement, callback) {
+	constructor(game, name = '', selector, costs, requirement, callback, classCan, classCannot) {
 		super(game, name, selector, requirement, callback);
 		this.costs = costs || new Cost();
+		this.classCan = classCan;
+		this.classCannot = classCannot;
 	}
 
 	costsCanBePayed() {
@@ -68,11 +70,11 @@ class CostedButton extends ControlButton {
 	render() {
 		super.render();
 		if (this.costsCanBePayed()) {
-			this.element.addClass('btn-primary');
-			this.element.removeClass('btn-warning');
+			this.element.addClass(this.classCan);
+			this.element.removeClass(this.classCannot);
 		} else {
-			this.element.addClass('btn-warning');
-			this.element.removeClass('btn-primary');
+			this.element.addClass(this.classCannot);
+			this.element.removeClass(this.classCan);
 		}
 	}
 	
@@ -85,7 +87,7 @@ class CostedButton extends ControlButton {
 
 class UpgradeButton extends CostedButton {
     constructor(game, upgrade, selector) {
-        super(game, upgrade.name, `${selector} .btn`, upgrade.costs);
+        super(game, upgrade.name, `${selector} .btn`, upgrade.costs, undefined, undefined, 'btn-primary', 'btn-warning');
         this.listElement = $(selector);
         this.upgrade = upgrade;
     }
@@ -123,7 +125,7 @@ class UpgradeButton extends CostedButton {
 
 class ResourceButton extends CostedButton {
     constructor(game, name, selector, costs, resource, amount = 1, requirement) {
-        super(game, name, selector, costs, requirement);
+        super(game, name, selector, costs, requirement, undefined, 'btn-primary', 'btn-warning');
         this.resource = resource;
         this.modifierName = `${this.resource.id}Modifier`;
         this.amount = amount;

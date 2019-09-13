@@ -17,7 +17,9 @@ class Module extends Model {
 
     tick() {}
 
-    load(saveObject) {}
+    load(saveObject) {
+        Object.assign(this, saveObject);
+    }
 
     save() {
         return {

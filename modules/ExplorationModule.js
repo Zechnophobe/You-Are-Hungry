@@ -2,13 +2,13 @@ class ExplorationModule extends Module {
 
     constructor(game) {
         super(game);
-        new CostedButton(this.game, 'Explore new lands', Elements.exploreButton, new ResourceCost(this.game, {[Resources.caravans.id]: 1}), undefined, () => {
+        this.exploreButton = new CostedButton(this.game, 'Explore new lands', Elements.exploreButton, new ResourceCost(this.game, {[Resources.caravans.id]: 1}), undefined, () => {
             this.onClickExploreLand();
-        });
+        }, 'btn-success', 'btn-secondary');
     }
 
     tick() {
-
+        this.exploreButton.render();
     }
 
     val(valName) {

@@ -20,6 +20,8 @@ function init() {
     addElement(new UpgradeView(game, Elements.upgradeList, GlobalUpgrades));
 
     new View(game, Elements.actionDisplay, 'lastMessage');
+    new GameTierDisplay(game, Elements.gameTierDisplay, 'tier');
+    new CounterView(game, Elements.displayList, GameResources);
     render(); // Do a single initial render without waiting for the play loop
     playSpeed = defaultPlaySpeed;
 }
