@@ -1,9 +1,15 @@
 class FriendModule extends Module {
 
+    constructor(game) {
+        super(game);
+
+        //TODO Create view for friends
+    }
+
     tick() {
         // Farmer grow food.
         this.growFood();
-        this.chopWood();
+        this.chopWood();/**/
     }
 
     growFood() {
@@ -15,20 +21,20 @@ class FriendModule extends Module {
         const howMuch = .1 * this.game.woodcutters;
         const hungerCost = this.game.woodcutters / (this.game.allFriends() + You);
         if (this.game.hunger >= hungerCost) {
-            this.game.hunger -= hungerCost;
+            this.game.modify(Resources.hunger.id, -hungerCost);
             this.game.gainResource(Resources.wood.id, howMuch, Values.chopWoodModifier);
         }
     }
 
     val(valName) {
         if (valName === Values.hungerCostModifier) {
-            return this.hungerCostReductionFromConstructors()
+            return this.hungerCostReductionFromConstructors();
         }
         return 1;
     }
 
     hungerCostReductionFromConstructors() {
-        return 1.0 / ((this.game.constructors) + You)
+        return 1.0 / ((this.game.constructors) + You);
 
     }
 }

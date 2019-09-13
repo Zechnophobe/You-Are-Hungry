@@ -3,7 +3,7 @@ class HungerModule extends Module {
         super(game);
 
         this.hungerModifiers = [Values.foodModifier, Values.woodModifier];
-        addElement(new HungerBarDisplay(this));
+        new HungerBarDisplay(this.game, Elements.hungerProgress, Resources.hunger.id, Values.maxHunger);
     }
 
     modifyResource() {
@@ -14,7 +14,11 @@ class HungerModule extends Module {
         const maxModifier = this.game.val(Values.maxHungerModifier);
         const minModifier = this.game.val(Values.minHungerModifier);
         const modifierRange = maxModifier - minModifier;
-        return minModifier + this.hungerPercentage() * modifierRange;
+        return minModifier + this.game.hungerPercentage() * modifierRange;
+    }
+
+    get(name) {
+        return this.game.get(name);
     }
 
     val(valueName) {
@@ -22,10 +26,6 @@ class HungerModule extends Module {
             return this.modifyResource();
         }
         return 1;
-    }
-
-    hungerPercentage() {
-        return this.game.hunger / this.game.val(Values.maxHunger);
     }
 
     tick() {
@@ -52,8 +52,8 @@ class HungerModule extends Module {
             const nourishmentGain = nourishment * biteSize * fullMealRatio;
             const nourishmentNeeded = maxHunger - this.game.hunger;
             const nourishNeededRatio = Math.min(nourishmentNeeded / nourishmentGain, 1);
-            this.game.food -= totalFoodEaten * nourishNeededRatio; // Only eat as much food as would fill you
-            this.game.hunger = Math.min(maxHunger, this.game.hunger + nourishmentGain);
+            this.game.modify(Resources.food.id, -(totalFoodEaten * nourishNeededRatio)); // Only eat as much food as would fill you
+            this.game.set(Resources.hunger.id, Math.min(maxHunger, this.game.hunger + nourishmentGain));
 
         }
     }

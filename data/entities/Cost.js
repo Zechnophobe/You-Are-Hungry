@@ -51,7 +51,7 @@ class ResourceCost extends Cost {
     pay() {
         if (this.canBePayed()) {
             for (let [name, amount] of this.costs()) {
-                this.game[name] -= amount;
+                this.game.modify(name, -amount);
             }
             return true;
         }

@@ -2,6 +2,7 @@ const Resources = {
     food: {
         name: 'Food',
         id: 'food',
+        verb: 'Found',
     },
     hunger: {
         name: 'Hunger',
@@ -10,18 +11,22 @@ const Resources = {
     wood: {
         name: 'Wood',
         id: 'wood',
+        verb: 'Found',
     },
     friends: {
         name: 'Friends',
         id: 'friends',
+        verb: 'Befriended',
     },
     huts: {
         name: 'Huts',
         id: 'huts',
+        verb: 'Constructed',
     },
     farms: {
         name: 'Farms',
         id: 'farms',
+        verb: 'Constructed',
     },
     farmers: {
         name: 'Farmers',
@@ -30,6 +35,7 @@ const Resources = {
     sheds: {
         name: 'Sheds',
         id: 'sheds',
+        verb: 'Constructed',
     },
     woodcutters: {
         name: 'Woodcutters',
@@ -38,10 +44,21 @@ const Resources = {
     offices: {
         name: 'Construction Offices',
         id: 'offices',
+        verb: 'Constructed',
     },
     constructors: {
         name: 'Constructors',
         id: 'constructors',
+    },
+    caravans: {
+        name: 'Caravans',
+        id: 'caravans',
+        verb: 'Formed',
+    },
+    land: {
+        name: 'Land',
+        id: 'land',
+        verb: 'Discovered',
     },
 };
 
@@ -57,6 +74,7 @@ const GameResources = [
     Resources.woodcutters,
     Resources.offices,
     Resources.constructors,
+    Resources.caravans,
 ];
 
 const ResourceButtons = [
@@ -174,5 +192,16 @@ const ResourceButtons = [
             callback: [1, 'freeConstructors', 'You need at least 1 construction office per construction worker.'],
         },
         requirement: {tier: GameTiers.overworked}
+    },
+    {
+        resource: Resources.caravans,
+        name: 'Form a caravan of your friends!',
+        amount: 1,
+        costs: {
+            resource: {
+                [Resources.friends.id]: 5,
+            },
+        },
+        requirement: {tier: GameTiers.explore}
     },
 ];

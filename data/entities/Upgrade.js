@@ -19,6 +19,7 @@ class Upgrade {
         if (this.costs.pay()) {
             this.game.gainUpgrade(this);
             this.purchased = true;
+            messageLog.log(`Researched Upgrade ${this.name}`);
             return true;
         }
         return false;

@@ -5,15 +5,17 @@
 class Game extends Module {
     constructor() {
         super(null);
-        this.tier = GameTiers.hungry;
-        this.food = 0;
-        this.wood = 0;
-        this.huts = 0;
-        this.hunger = 15.0;
-        this.friends = 0;
+
         this.modules = [];
         this.modifiers = [];
         this.upgrades = {};
+        new GameTierDisplay(this, Elements.gameTierDisplay, 'tier');
+        new CounterView(this, Elements.displayList, GameResources);
+        this.addModule(new HungerModule(this));
+        this.food = 0;
+        this.wood = 0;
+        this.huts = 0;
+        this.friends = 0;
         this.land = 50;
         this.farms = 0;
         this.farmers = 0;
@@ -24,9 +26,9 @@ class Game extends Module {
 
 
         this.vals = DefaultValues;
-        this.addModule(new HungerModule(this));
 
-        this.actionElement = $(Elements.actionDisplay); //TODO break into view.
+        this.tierController = new HungryTier(this);
+        this.set(Resources.hunger.id, 15.0);
     }
 
     housing() {
@@ -57,27 +59,23 @@ class Game extends Module {
         return this.friends + this.farmers + this.woodcutters + this.constructors;
     }
 
+    hungerPercentage() {
+        return this.hunger / this.val(Values.maxHunger);
+    }
+
     // What computes every game increment
     tick() {
         for (let module of this.modules) {
             module.tick();
         }
-        if (this.hunger >= this.val(Values.maxHunger) && this.tier === GameTiers.hungry) {
-            this.tier = GameTiers.cold;
-        }
-        if (this.huts >= 1 && this.tier === GameTiers.cold) {
-            this.tier = GameTiers.lonely;
-        }
-        if (this.friends >= 1 && this.tier === GameTiers.lonely) {
-            this.tier = GameTiers.overworked;
-            this.addModule(new FriendModule(this));
-        }
+        // Check if we should move on to the next game tier.
+        this.tierController = this.tierController.progress();
     }
 
 
     gainResource(resourceId, amount, modifierType) {
         const totalGained = amount * this.val(modifierType);
-        this[resourceId] += totalGained;
+        this.modify(resourceId, totalGained);
         return totalGained;
     }
 
@@ -106,10 +104,11 @@ class Game extends Module {
     }
 
 
-    getRandomBonusLoot(gained, resourceId) {
+    getRandomBonusLoot(gained, resource) {
         /**
          * Should be called after a manual action is taken to give the player some bonus loot
          */
+        const resourceId = resource.id;
         const lootLevel = this.getRarity();
         let bonusMessage = '';
         let upgradeMessage = '';
@@ -132,17 +131,16 @@ class Game extends Module {
             if (loot.upgrade) {
                 const upgrade = new Upgrade(this, lootUpgrades[loot.upgrade]);
                 if (!this.hasUpgrade(upgrade.id)) {
-                    upgradeMessage += `Free Upgrade: ${upgrade.name}`;
                     this.gainUpgrade(upgrade);
                 }
             }
         }
-        let message = `Got ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage} ${upgradeMessage}`;
-        this.updateActionElement(message)
-    }
-
-    updateActionElement(message) {
-        this.actionElement.html(message);
+        const verb = resource.verb || 'Got';
+        const message = `${verb} ${lootName} - worth ${gained.toFixed(2)} ${resourceId} ${bonusMessage}`;
+        this.set('lastMessage', message);
+        if (loot.message) {
+            messageLog.log(loot.message);
+        }
     }
 
     val(valName) {

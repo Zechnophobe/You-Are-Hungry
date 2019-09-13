@@ -2,9 +2,13 @@ const Elements = {
     gameTierDisplay: '#game-tier-display',
     hungerProgress: '#hunger-progress',
     upgradeList: '#upgrade-list',
+    completedUpgradeList: '#completed-upgrade-list',
     displayList: '#display-list',
     buttonDisplay: '#button-display',
     actionDisplay: '#action-display',
+    exploreButton: '#explore-lands',
+
+    messageLog: '#message-log',
 };
 
 const You = 1;
@@ -20,6 +24,7 @@ const GameTiers = {
     lonely: 'Lonely',
     cold: 'Cold',
     overworked: 'Overworked',
+    explore: 'Claustrophobic',
     unobtainable: 'unobtainable',
 };
 
@@ -35,6 +40,7 @@ const TierOrder = {
     [GameTiers.cold]: 2,
     [GameTiers.lonely]: 3,
     [GameTiers.overworked]: 4,
+    [GameTiers.explore]: 5,
 
 
 
@@ -57,6 +63,7 @@ const Values = {
     friendsModifier: 'friendsModifier',
     housingModifier: 'housingModifier',
     farmerModifier: 'farmerModifier',
+    landModifier: 'landModifier',
 
     //Friend modifiers
     farmFoodModifier: 'farmFoodModifier',
