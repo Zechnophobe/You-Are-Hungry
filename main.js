@@ -1,6 +1,7 @@
 let game;
 let playSpeed;
 const GlobalUpgrades = [];
+const GlobalMissions = [];
 const defaultPlaySpeed = 100;
 let playLoopStatus = PlayLoopStatus.playing;
 const displayElements = [];
@@ -53,5 +54,11 @@ function render() {
 function loadUpgrades(game) {
     for (let upgradeParams of simpleUpgrades) {
         GlobalUpgrades.push(new Upgrade(game, upgradeParams));
+    }
+}
+
+function loadMissions(game) {
+    for (let missionParams of Missions) {
+        GlobalMissions.push(new Mission(game, ...missionParams));
     }
 }

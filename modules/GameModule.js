@@ -9,6 +9,7 @@ class Game extends Module {
         this.modules = [];
         this.modifiers = [];
         this.upgrades = {};
+        this.activeMissions = {};
         this.addModule(new HungerModule(this));
         this.food = 0;
         this.wood = 0;
@@ -65,6 +66,11 @@ class Game extends Module {
     tick() {
         for (let module of this.modules) {
             module.tick();
+        }
+        for (let [id, mission] of Object.entries(this.activeMissions)) {
+            if (mission.tick()) {
+                delete this.activeMissions[id]
+            }
         }
         // Check if we should move on to the next game tier.
         this.tierController = this.tierController.progress();

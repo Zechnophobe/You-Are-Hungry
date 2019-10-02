@@ -205,3 +205,10 @@ const ResourceButtons = [
         requirement: {tier: GameTiers.explore}
     },
 ];
+
+const FriendTypes = [
+  Resources.friends,
+  Resources.farmers,
+  Resources.woodcutters,
+  Resources.constructors,
+];
